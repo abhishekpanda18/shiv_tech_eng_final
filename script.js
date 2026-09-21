@@ -16,7 +16,6 @@ let current = 0;
 let animationFrame = null;
 
 
-/* Start at first frame */
 
 if (video) {
 
@@ -27,7 +26,10 @@ if (video) {
 }
 
 
-/* Calculate scroll */
+
+/* =========================================================
+   HERO SCROLL POSITION
+========================================================= */
 
 function updateTarget() {
 
@@ -66,7 +68,10 @@ function updateTarget() {
 }
 
 
-/* Smooth video */
+
+/* =========================================================
+   SMOOTH VIDEO
+========================================================= */
 
 function renderVideo() {
 
@@ -144,7 +149,7 @@ updateTarget();
 
 
 /* =========================================================
-   PRODUCTS
+   PRODUCT DATA
 ========================================================= */
 
 const products = [
@@ -310,7 +315,7 @@ const products = [
 
         images: [
             "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32.jpeg",
-            "products/pin plunger/WhatsApp Imannnge 2026-09-17 at 19.01.32.jpeg"
+            "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32_1.jpeg"
         ]
     },
 
@@ -325,7 +330,7 @@ const products = [
 
         images: [
             "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33.jpeg",
-            "products/shoulder bolt_ stripper bolt/WhatsApp Imn kjage 2026-09-17 at 19.01.33.jpeg"
+            "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33_1.jpeg"
         ]
     },
 
@@ -340,7 +345,7 @@ const products = [
 
         images: [
             "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34.jpeg",
-            "products/quick ball lock pin/WhatsApp Imagebn kj 2026-09-17 at 19.01.34.jpeg"
+            "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34_1.jpeg"
         ]
     }
 
@@ -356,7 +361,7 @@ const productList =
     document.getElementById("productList");
 
 
-products.forEach((product, index) => {
+products.forEach((product) => {
 
     const card =
         document.createElement("article");
@@ -365,14 +370,6 @@ products.forEach((product, index) => {
     card.className =
         "product-card";
 
-
-    /*
-        Every catalogue card uses the first/main
-        product image.
-
-        CSS zoom crops the top logo and bottom
-        yellow text from the display view.
-    */
 
     card.innerHTML = `
 
@@ -429,7 +426,7 @@ products.forEach((product, index) => {
 
 
 /* =========================================================
-   MODAL
+   MODAL ELEMENTS
 ========================================================= */
 
 const modal =
@@ -498,14 +495,6 @@ function openProduct(product) {
 
             }
 
-
-            /*
-                IMPORTANT:
-
-                These images are NOT cropped.
-
-                They are the original images.
-            */
 
             page.innerHTML = `
 
@@ -599,7 +588,9 @@ modalBackdrop.addEventListener(
 
 
 
-/* ESC */
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
 
 document.addEventListener(
     "keydown",

@@ -13,9 +13,9 @@ html {
 body {
     margin: 0;
 
-    background: #f2f3f0;
+    background: #080b0d;
 
-    color: #181b1d;
+    color: #f2f5f4;
 
     font-family:
         Arial,
@@ -58,7 +58,7 @@ button {
     left: 3vw;
     right: 3vw;
 
-    height: 68px;
+    height: 70px;
 
     display: flex;
 
@@ -66,31 +66,27 @@ button {
 
     justify-content: space-between;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
     border:
-        1px solid rgba(255,255,255,0.28);
+        1px solid rgba(255,255,255,0.20);
 
     border-radius: 16px;
 
     background:
-        rgba(245,247,245,0.14);
+        rgba(12,16,18,0.42);
 
     backdrop-filter:
-        blur(20px)
+        blur(22px)
         saturate(150%);
 
     -webkit-backdrop-filter:
-        blur(20px)
+        blur(22px)
         saturate(150%);
 
     box-shadow:
-        0 12px 40px
-        rgba(0,0,0,0.10);
-
-    transition:
-        background 0.3s ease,
-        border 0.3s ease;
+        0 15px 45px
+        rgba(0,0,0,0.32);
 }
 
 
@@ -98,7 +94,7 @@ button {
 
 .brand {
 
-    width: 180px;
+    width: 190px;
 
     height: 100%;
 
@@ -109,9 +105,9 @@ button {
 
 .brand img {
 
-    width: 160px;
+    width: 165px;
 
-    height: 54px;
+    height: 55px;
 
     object-fit: contain;
 
@@ -119,7 +115,7 @@ button {
 }
 
 
-/* Links */
+/* Navigation links */
 
 .nav-links {
 
@@ -127,30 +123,36 @@ button {
 
     align-items: center;
 
-    gap: 34px;
+    gap: 48px;
 }
+
 
 .nav-links a {
 
-    color: #ffffff;
+    color: #f4f7f6;
 
-    font-size: 10px;
+    font-size: 12px;
 
     font-weight: 600;
 
-    letter-spacing: 0.17em;
+    letter-spacing: 0.18em;
 
     text-transform: uppercase;
 
     text-shadow:
-        0 1px 4px rgba(0,0,0,0.35);
+        0 2px 8px rgba(0,0,0,0.5);
 
     transition:
-        opacity 0.2s ease;
+        color 0.25s ease,
+        opacity 0.25s ease;
 }
 
+
 .nav-links a:hover {
-    opacity: 0.65;
+
+    color: #39b8ed;
+
+    opacity: 1;
 }
 
 
@@ -162,44 +164,45 @@ button {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 9px;
 
     padding:
-        10px 14px;
+        11px 16px;
 
     color: #ffffff;
 
     border:
-        1px solid rgba(255,255,255,0.45);
+        1px solid rgba(255,255,255,0.35);
 
     border-radius: 9px;
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 600;
 
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
 
     text-transform: uppercase;
 
     background:
-        rgba(255,255,255,0.08);
-
-    text-shadow:
-        0 1px 4px rgba(0,0,0,0.35);
+        rgba(255,255,255,0.07);
 
     transition:
-        background 0.25s ease;
+        background 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .nav-contact:hover {
 
     background:
-        rgba(255,255,255,0.2);
+        rgba(40,174,226,0.18);
+
+    border-color:
+        rgba(70,190,235,0.65);
 }
 
 .nav-contact span {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
@@ -254,7 +257,7 @@ button {
 
 
 /* =========================================================
-   GENERAL
+   GENERAL LABEL
 ========================================================= */
 
 .section-label {
@@ -263,11 +266,11 @@ button {
 
     align-items: center;
 
-    gap: 11px;
+    gap: 12px;
 
-    color: #667074;
+    color: #879398;
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 600;
 
@@ -276,11 +279,11 @@ button {
 
 .section-label span {
 
-    width: 28px;
+    width: 32px;
 
     height: 1px;
 
-    background: #0b628a;
+    background: #25a9df;
 }
 
 
@@ -295,7 +298,8 @@ button {
         120px 7vw
         0;
 
-    background: #f2f3f0;
+    background:
+        #0b1012;
 
     overflow: hidden;
 }
@@ -309,15 +313,16 @@ button {
 
     justify-content: space-between;
 
-    padding-bottom: 24px;
+    padding-bottom: 25px;
 
     border-bottom:
-        1px solid #d0d4d2;
+        1px solid #263035;
 }
+
 
 .section-code {
 
-    color: #8b9295;
+    color: #5d696e;
 
     font-size: 9px;
 
@@ -338,7 +343,7 @@ button {
     gap: 9vw;
 
     padding:
-        105px 0
+        100px 0
         90px;
 }
 
@@ -347,7 +352,7 @@ button {
 
     margin: 0;
 
-    color: #181b1d;
+    color: #f1f5f4;
 
     font-size:
         clamp(
@@ -363,11 +368,12 @@ button {
     font-weight: 500;
 }
 
+
 .about-title h2 span {
 
     display: block;
 
-    color: #0b628a;
+    color: #24ace3;
 
     font-weight: 400;
 }
@@ -382,12 +388,13 @@ button {
     align-self: end;
 }
 
+
 .about-lead {
 
     margin:
         0 0 27px;
 
-    color: #242a2d;
+    color: #dce3e2;
 
     font-size: 19px;
 
@@ -396,11 +403,12 @@ button {
     letter-spacing: -0.02em;
 }
 
+
 .about-text > p:not(.about-lead) {
 
     margin: 0;
 
-    color: #697276;
+    color: #7e8a8f;
 
     font-size: 13px;
 
@@ -415,7 +423,7 @@ button {
     margin:
         42px 0 19px;
 
-    background: #cbd0ce;
+    background: #273136;
 }
 
 
@@ -426,20 +434,22 @@ button {
     gap: 17px;
 }
 
+
 .about-small-note span {
 
-    color: #0b628a;
+    color: #27b2e8;
 
     font-size: 9px;
 
     letter-spacing: 0.15em;
 }
 
+
 .about-small-note p {
 
     margin: 0;
 
-    color: #5f686c;
+    color: #7c888d;
 
     font-size: 11px;
 
@@ -449,224 +459,7 @@ button {
 
 
 /* =========================================================
-   TECHNICAL VISUAL
-========================================================= */
-
-.technical-visual {
-
-    position: relative;
-
-    height: 430px;
-
-    border:
-        1px solid #cdd2cf;
-
-    background: #e8eae7;
-
-    overflow: hidden;
-}
-
-
-.technical-grid {
-
-    position: absolute;
-
-    inset: 0;
-
-    background-image:
-
-        linear-gradient(
-            rgba(70,80,84,0.08) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(70,80,84,0.08) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        45px 45px;
-}
-
-
-.technical-circle {
-
-    position: absolute;
-
-    border:
-        1px solid
-        rgba(11,98,138,0.32);
-
-    border-radius: 50%;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-}
-
-
-.circle-large {
-
-    width: 440px;
-    height: 440px;
-}
-
-.circle-small {
-
-    width: 270px;
-    height: 270px;
-}
-
-
-.technical-cross {
-
-    position: absolute;
-
-    width: 18px;
-    height: 18px;
-}
-
-.technical-cross::before,
-.technical-cross::after {
-
-    content: "";
-
-    position: absolute;
-
-    background: #0b628a;
-}
-
-.technical-cross::before {
-
-    width: 18px;
-    height: 1px;
-
-    left: 0;
-    top: 9px;
-}
-
-.technical-cross::after {
-
-    width: 1px;
-    height: 18px;
-
-    left: 9px;
-    top: 0;
-}
-
-.cross-top {
-
-    left: 28px;
-    top: 28px;
-}
-
-.cross-bottom {
-
-    right: 28px;
-    bottom: 28px;
-}
-
-
-.technical-label {
-
-    position: absolute;
-
-    color: #737c80;
-
-    font-size: 8px;
-
-    letter-spacing: 0.19em;
-
-    font-weight: 600;
-}
-
-.technical-label-top {
-
-    top: 30px;
-    right: 30px;
-}
-
-.technical-label-bottom {
-
-    left: 30px;
-    bottom: 30px;
-}
-
-.technical-label-side {
-
-    right: 22px;
-    top: 50%;
-
-    transform:
-        rotate(90deg)
-        translateX(50%);
-
-    transform-origin: right center;
-}
-
-
-.technical-center {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 150px;
-    height: 150px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transform:
-        translate(-50%, -50%);
-
-    color: #0b628a;
-
-    font-size: 9px;
-
-    letter-spacing: 0.25em;
-
-    font-weight: 600;
-}
-
-.center-ring {
-
-    position: absolute;
-
-    inset: 24px;
-
-    border:
-        1px solid #0b628a;
-
-    border-radius: 50%;
-}
-
-.technical-center::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #0b628a;
-}
-
-
-
-/* =========================================================
-   ABOUT PRINCIPLES
+   FOUR PRINCIPLES
 ========================================================= */
 
 .about-principles {
@@ -677,27 +470,29 @@ button {
         repeat(4, 1fr);
 
     border-top:
-        1px solid #cdd2cf;
+        1px solid #273136;
 
     border-bottom:
-        1px solid #cdd2cf;
+        1px solid #273136;
 }
 
 
 .principle {
 
-    min-height: 180px;
+    min-height: 190px;
 
     padding:
-        27px 28px 30px 0;
+        30px 28px 32px 0;
 
     border-right:
-        1px solid #cdd2cf;
+        1px solid #273136;
 }
+
 
 .principle:not(:first-child) {
     padding-left: 28px;
 }
+
 
 .principle:last-child {
     border-right: none;
@@ -708,9 +503,9 @@ button {
 
     display: block;
 
-    margin-bottom: 32px;
+    margin-bottom: 36px;
 
-    color: #0b628a;
+    color: #25aee4;
 
     font-size: 9px;
 
@@ -721,26 +516,29 @@ button {
 .principle h3 {
 
     margin:
-        0 0 11px;
+        0 0 12px;
 
-    font-size: 11px;
+    color: #f1f5f4;
 
-    letter-spacing: 0.14em;
+    font-size: 12px;
+
+    letter-spacing: 0.15em;
 
     font-weight: 600;
 }
 
+
 .principle p {
 
-    max-width: 190px;
+    max-width: 200px;
 
     margin: 0;
 
-    color: #737b7f;
+    color: #748085;
 
     font-size: 11px;
 
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 
@@ -752,9 +550,10 @@ button {
 .products-section {
 
     padding:
-        140px 7vw;
+        125px 7vw;
 
-    background: #ffffff;
+    background:
+        #070a0c;
 }
 
 
@@ -766,22 +565,22 @@ button {
 
     justify-content: space-between;
 
-    margin-bottom: 65px;
+    margin-bottom: 52px;
 }
 
 
 .products-heading h2 {
 
     margin:
-        28px 0 0;
+        27px 0 0;
 
-    color: #181b1d;
+    color: #f1f5f4;
 
     font-size:
         clamp(
-            52px,
-            7vw,
-            105px
+            50px,
+            6.7vw,
+            100px
         );
 
     line-height: 0.88;
@@ -791,23 +590,25 @@ button {
     font-weight: 500;
 }
 
+
 .products-heading h2 span {
 
     display: block;
 
-    color: #0b628a;
+    color: #25aee4;
 
     font-weight: 400;
 }
+
 
 .products-heading p {
 
     max-width: 430px;
 
     margin:
-        27px 0 0;
+        25px 0 0;
 
-    color: #737b7f;
+    color: #707c81;
 
     font-size: 12px;
 
@@ -826,18 +627,20 @@ button {
     gap: 9px;
 }
 
+
 .product-range-number span {
 
-    color: #8b9295;
+    color: #58646a;
 
     font-size: 8px;
 
     letter-spacing: 0.18em;
 }
 
+
 .product-range-number strong {
 
-    color: #31373a;
+    color: #c5cecc;
 
     font-size: 11px;
 
@@ -849,7 +652,7 @@ button {
 
 
 /* =========================================================
-   PRODUCT DISPLAY BOXES
+   PRODUCT GRID
 ========================================================= */
 
 .product-grid {
@@ -859,24 +662,30 @@ button {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 18px;
+    gap: 15px;
 }
 
+
+
+/* =========================================================
+   SMALLER PRODUCT BOXES
+========================================================= */
 
 .product-card {
 
     position: relative;
 
-    min-height: 390px;
+    min-height: 325px;
 
     display: flex;
 
     flex-direction: column;
 
-    background: #f3f4f1;
+    background:
+        #101619;
 
     border:
-        1px solid #d7dbd8;
+        1px solid #263136;
 
     cursor: pointer;
 
@@ -892,15 +701,16 @@ button {
 .product-card:hover {
 
     transform:
-        translateY(-5px);
+        translateY(-4px);
 
     border-color:
-        #aeb8ba;
+        #3c555e;
 
     box-shadow:
-        0 18px 45px
-        rgba(25,35,38,0.09);
+        0 20px 45px
+        rgba(0,0,0,0.35);
 }
+
 
 
 /* Number */
@@ -911,18 +721,19 @@ button {
 
     z-index: 4;
 
-    top: 18px;
-    left: 19px;
+    top: 14px;
+    left: 16px;
 
-    color: #727c80;
+    color: #6f7c81;
 
-    font-size: 9px;
+    font-size: 8px;
 
     letter-spacing: 0.15em;
 }
 
 
-/* Corner arrow */
+
+/* Arrow */
 
 .card-arrow {
 
@@ -930,11 +741,11 @@ button {
 
     z-index: 4;
 
-    top: 15px;
-    right: 17px;
+    top: 12px;
+    right: 14px;
 
-    width: 29px;
-    height: 29px;
+    width: 27px;
+    height: 27px;
 
     display: flex;
 
@@ -943,16 +754,16 @@ button {
     justify-content: center;
 
     border:
-        1px solid #c8cfcc;
+        1px solid #39464b;
 
     border-radius: 50%;
 
-    color: #606a6e;
+    color: #a7b0b1;
 
-    font-size: 15px;
+    font-size: 14px;
 
     background:
-        rgba(255,255,255,0.55);
+        rgba(5,8,9,0.35);
 
     transition:
         background 0.25s ease,
@@ -960,30 +771,32 @@ button {
         transform 0.25s ease;
 }
 
+
 .product-card:hover .card-arrow {
 
-    background: #0b628a;
+    background: #159fd6;
 
     color: #ffffff;
 
-    border-color: #0b628a;
+    border-color: #159fd6;
 
     transform:
         translate(2px,-2px);
 }
 
 
+
 /* =========================================================
-   CATALOGUE IMAGE
+   PRODUCT IMAGE
 ========================================================= */
 
 .card-image {
 
     position: relative;
 
-    height: 285px;
+    height: 230px;
 
-    margin: 9px;
+    margin: 7px;
 
     margin-bottom: 0;
 
@@ -993,26 +806,15 @@ button {
 
     justify-content: center;
 
-    background: #ffffff;
+    background:
+        #151b1e;
 
     border:
-        1px solid #e0e3e0;
+        1px solid #222d31;
 
     overflow: hidden;
 }
 
-
-/*
-    IMPORTANT:
-
-    The catalogue uses the original image,
-    but zooms it so the logo/header and
-    yellow text strip fall outside the
-    visible display area.
-
-    The popup still uses the original
-    image at 100%.
-*/
 
 .card-image img {
 
@@ -1035,25 +837,9 @@ button {
 .product-card:hover .card-image img {
 
     transform:
-        scale(1.46);
+        scale(1.45);
 }
 
-
-/* Product-specific crop adjustments */
-
-.product-card.crop-high .card-image img {
-
-    transform:
-        scale(1.45)
-        translateY(3%);
-}
-
-.product-card.crop-high:hover .card-image img {
-
-    transform:
-        scale(1.52)
-        translateY(3%);
-}
 
 
 /* =========================================================
@@ -1062,7 +848,7 @@ button {
 
 .card-info {
 
-    min-height: 95px;
+    min-height: 80px;
 
     display: flex;
 
@@ -1071,12 +857,13 @@ button {
     justify-content: space-between;
 
     padding:
-        18px 19px;
+        15px 17px;
 
     border-top:
-        1px solid #d9ddda;
+        1px solid #263136;
 
-    background: #f3f4f1;
+    background:
+        #101619;
 }
 
 
@@ -1084,9 +871,9 @@ button {
 
     margin: 0;
 
-    color: #1d2224;
+    color: #e8eeec;
 
-    font-size: 17px;
+    font-size: 15px;
 
     font-weight: 500;
 
@@ -1097,11 +884,11 @@ button {
 .card-info p {
 
     margin:
-        7px 0 0;
+        6px 0 0;
 
-    color: #8a9295;
+    color: #68757a;
 
-    font-size: 9px;
+    font-size: 8px;
 
     line-height: 1.5;
 }
@@ -1126,7 +913,7 @@ button {
 
     justify-content: center;
 
-    padding: 30px;
+    padding: 25px;
 
     opacity: 0;
 
@@ -1157,10 +944,10 @@ button {
     inset: 0;
 
     background:
-        rgba(20,26,28,0.72);
+        rgba(0,0,0,0.82);
 
     backdrop-filter:
-        blur(12px);
+        blur(15px);
 }
 
 
@@ -1177,16 +964,17 @@ button {
 
     overflow-y: auto;
 
-    padding: 38px;
+    padding: 35px;
 
-    background: #f5f6f3;
+    background:
+        #101619;
 
     border:
-        1px solid #d1d5d2;
+        1px solid #2b373c;
 
     box-shadow:
-        0 35px 90px
-        rgba(0,0,0,0.22);
+        0 35px 100px
+        rgba(0,0,0,0.65);
 }
 
 
@@ -1196,29 +984,33 @@ button {
 
     z-index: 5;
 
-    top: 18px;
-    right: 20px;
+    top: 17px;
+    right: 19px;
 
-    width: 42px;
-    height: 42px;
+    width: 41px;
+    height: 41px;
 
     border:
-        1px solid #c9cfcc;
+        1px solid #3b484d;
 
-    background: #ffffff;
+    background:
+        #151c20;
 
-    color: #202527;
+    color: #e7eceb;
 
-    font-size: 26px;
+    font-size: 25px;
 
     line-height: 1;
 
     cursor: pointer;
 }
 
+
 .modal-close:hover {
 
-    background: #1b2327;
+    background: #25aee4;
+
+    border-color: #25aee4;
 
     color: #ffffff;
 }
@@ -1233,12 +1025,12 @@ button {
     justify-content: space-between;
 
     padding:
-        0 60px 25px 0;
+        0 60px 24px 0;
 
-    margin-bottom: 25px;
+    margin-bottom: 23px;
 
     border-bottom:
-        1px solid #d1d5d2;
+        1px solid #2b373c;
 }
 
 
@@ -1248,7 +1040,7 @@ button {
 
     margin-bottom: 8px;
 
-    color: #0b628a;
+    color: #25aee4;
 
     font-size: 9px;
 
@@ -1260,7 +1052,7 @@ button {
 
     margin: 0;
 
-    color: #181b1d;
+    color: #f1f5f4;
 
     font-size:
         clamp(
@@ -1279,7 +1071,7 @@ button {
 
 .modal-heading-label {
 
-    color: #858e91;
+    color: #6e7b80;
 
     font-size: 8px;
 
@@ -1287,7 +1079,8 @@ button {
 }
 
 
-/* Modal images */
+
+/* Original images remain unchanged */
 
 .modal-pages {
 
@@ -1299,16 +1092,17 @@ button {
             minmax(260px, 1fr)
         );
 
-    gap: 18px;
+    gap: 17px;
 }
 
 
 .modal-page {
 
-    background: #ffffff;
+    background:
+        #151b1e;
 
     border:
-        1px solid #d7dbd8;
+        1px solid #2b363b;
 }
 
 
@@ -1316,7 +1110,7 @@ button {
 
     width: 100%;
 
-    height: 390px;
+    height: 380px;
 
     display: flex;
 
@@ -1324,20 +1118,12 @@ button {
 
     justify-content: center;
 
-    background: #ffffff;
+    background:
+        #ffffff;
 
     overflow: hidden;
 }
 
-
-/*
-    IMPORTANT:
-
-    NO CROPPING HERE.
-
-    These are the original product
-    images exactly as supplied.
-*/
 
 .modal-page-image img {
 
@@ -1352,12 +1138,12 @@ button {
 .modal-page-label {
 
     padding:
-        14px 16px;
+        13px 15px;
 
     border-top:
-        1px solid #d7dbd8;
+        1px solid #2b363b;
 
-    color: #697276;
+    color: #7f8b90;
 
     font-size: 8px;
 
@@ -1376,16 +1162,17 @@ button {
 
     position: relative;
 
-    min-height: 72vh;
+    min-height: 65vh;
 
     display: flex;
 
     align-items: center;
 
     padding:
-        130px 7vw;
+        120px 7vw;
 
-    background: #e8eae7;
+    background:
+        #11181b;
 
     overflow: hidden;
 }
@@ -1400,13 +1187,13 @@ button {
     background-image:
 
         linear-gradient(
-            rgba(65,75,80,0.07) 1px,
+            rgba(100,120,128,0.06) 1px,
             transparent 1px
         ),
 
         linear-gradient(
             90deg,
-            rgba(65,75,80,0.07) 1px,
+            rgba(100,120,128,0.06) 1px,
             transparent 1px
         );
 
@@ -1430,7 +1217,7 @@ button {
     margin:
         28px 0 0;
 
-    color: #181b1d;
+    color: #f2f6f5;
 
     font-size:
         clamp(
@@ -1451,7 +1238,7 @@ button {
 
     display: block;
 
-    color: #7a8488;
+    color: #7c898e;
 
     font-weight: 300;
 }
@@ -1461,7 +1248,7 @@ button {
 
     display: block;
 
-    color: #0b628a;
+    color: #25aee4;
 
     font-style: normal;
 
@@ -1474,9 +1261,9 @@ button {
     max-width: 430px;
 
     margin:
-        50px 0 0 auto;
+        48px 0 0 auto;
 
-    color: #697276;
+    color: #718086;
 
     font-size: 12px;
 
@@ -1494,18 +1281,19 @@ button {
     display: grid;
 
     grid-template-columns:
-        1.2fr
-        0.8fr;
+        1.1fr
+        0.9fr;
 
     gap: 10vw;
 
     padding:
-        145px 7vw;
+        135px 7vw;
 
-    background: #ffffff;
+    background:
+        #080c0e;
 
     border-top:
-        1px solid #d6dad7;
+        1px solid #263136;
 }
 
 
@@ -1514,7 +1302,7 @@ button {
     margin:
         28px 0 0;
 
-    color: #181b1d;
+    color: #f1f5f4;
 
     font-size:
         clamp(
@@ -1535,7 +1323,7 @@ button {
 
     display: block;
 
-    color: #0b628a;
+    color: #25aee4;
 
     font-weight: 400;
 }
@@ -1545,50 +1333,55 @@ button {
 
     align-self: end;
 
-    max-width: 470px;
+    max-width: 500px;
 }
 
 
-.contact-right > p {
+.company-name {
 
-    margin:
-        0 0 45px;
+    margin-bottom: 45px;
 
-    color: #687276;
+    color: #f1f5f4;
 
-    font-size: 13px;
+    font-size: 15px;
 
-    line-height: 1.8;
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
 }
 
 
-.contact-email {
+.contact-address {
 
     display: flex;
 
-    align-items: center;
+    flex-direction: column;
 
-    justify-content: space-between;
-
-    padding-bottom: 16px;
-
-    border-bottom:
-        1px solid #bcc3c0;
-
-    color: #202527;
-
-    font-size: 14px;
-
-    transition:
-        color 0.2s ease;
+    gap: 13px;
 }
 
-.contact-email:hover {
-    color: #0b628a;
+
+.contact-label {
+
+    color: #25aee4;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.18em;
 }
 
-.contact-email span {
-    font-size: 18px;
+
+.contact-address p {
+
+    margin: 0;
+
+    color: #aeb8b9;
+
+    font-size: 13px;
+
+    line-height: 1.9;
 }
 
 
@@ -1599,19 +1392,55 @@ button {
     height: 1px;
 
     margin:
-        52px 0 17px;
+        42px 0 25px;
 
-    background: #d8dcda;
+    background: #293438;
 }
 
 
-.contact-type {
+.phone-block {
 
-    color: #8a9295;
+    display: flex;
 
-    font-size: 8px;
+    flex-direction: column;
 
-    letter-spacing: 0.18em;
+    gap: 12px;
+}
+
+
+.phone-block a {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #354147;
+
+    color: #edf3f2;
+
+    font-size: 17px;
+
+    letter-spacing: 0.02em;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.phone-block a:hover {
+
+    color: #25aee4;
+}
+
+
+.phone-block a span {
+
+    font-size: 18px;
 }
 
 
@@ -1633,9 +1462,13 @@ footer {
     padding:
         25px 7vw;
 
-    background: #20282c;
+    background:
+        #050708;
 
-    color: #dce2df;
+    color: #dce3e1;
+
+    border-top:
+        1px solid #20292d;
 }
 
 
@@ -1661,7 +1494,7 @@ footer {
 
     gap: 42px;
 
-    color: #909a9e;
+    color: #677277;
 
     font-size: 8px;
 
@@ -1679,7 +1512,11 @@ footer {
 @media (max-width: 950px) {
 
     .nav-links {
-        gap: 18px;
+        gap: 25px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
     }
 
     .about-intro,
@@ -1711,8 +1548,8 @@ footer {
     .navbar {
 
         top: 10px;
-        left: 12px;
-        right: 12px;
+        left: 10px;
+        right: 10px;
 
         height: 62px;
 
@@ -1722,9 +1559,12 @@ footer {
         border-radius: 13px;
     }
 
+
     .brand {
+
         width: 145px;
     }
+
 
     .brand img {
 
@@ -1733,9 +1573,12 @@ footer {
         height: 47px;
     }
 
+
     .nav-links {
+
         display: none;
     }
+
 
     .nav-contact {
 
@@ -1744,6 +1587,7 @@ footer {
 
         font-size: 8px;
     }
+
 
 
     /* ABOUT */
@@ -1755,6 +1599,7 @@ footer {
             0;
     }
 
+
     .about-intro {
 
         padding:
@@ -1763,31 +1608,19 @@ footer {
         gap: 55px;
     }
 
+
     .about-title h2 {
 
         font-size:
             13vw;
     }
 
+
     .about-lead {
+
         font-size: 17px;
     }
 
-    .technical-visual {
-        height: 300px;
-    }
-
-    .circle-large {
-
-        width: 310px;
-        height: 310px;
-    }
-
-    .circle-small {
-
-        width: 185px;
-        height: 185px;
-    }
 
 
     /* PRINCIPLES */
@@ -1798,6 +1631,7 @@ footer {
             1fr 1fr;
     }
 
+
     .principle {
 
         min-height: 155px;
@@ -1806,19 +1640,26 @@ footer {
             22px 14px;
     }
 
+
     .principle:not(:first-child) {
+
         padding-left: 14px;
     }
 
+
     .principle:nth-child(2) {
+
         border-right: none;
     }
 
+
     .principle:nth-child(3),
     .principle:nth-child(4) {
+
         border-top:
-            1px solid #cdd2cf;
+            1px solid #273136;
     }
+
 
 
     /* PRODUCTS */
@@ -1829,6 +1670,7 @@ footer {
             95px 20px;
     }
 
+
     .products-heading {
 
         display: block;
@@ -1836,36 +1678,40 @@ footer {
         margin-bottom: 42px;
     }
 
+
     .products-heading h2 {
 
         font-size:
             13vw;
     }
 
+
     .product-range-number {
+
         display: none;
     }
+
 
     .product-grid {
 
         grid-template-columns:
             1fr;
 
-        gap: 14px;
+        gap: 13px;
     }
 
-
-    /* Cards */
 
     .product-card {
 
-        min-height: 390px;
+        min-height: 330px;
     }
+
 
     .card-image {
 
-        height: 285px;
+        height: 240px;
     }
+
 
 
     /* MODAL */
@@ -1875,6 +1721,7 @@ footer {
         padding: 10px;
     }
 
+
     .modal-window {
 
         max-height: 95vh;
@@ -1883,14 +1730,18 @@ footer {
             24px 15px;
     }
 
+
     .modal-header {
 
         padding-right: 45px;
     }
 
+
     .modal-heading-label {
+
         display: none;
     }
+
 
     .modal-pages {
 
@@ -1898,20 +1749,24 @@ footer {
             1fr;
     }
 
+
     .modal-page-image {
+
         height: 330px;
     }
+
 
 
     /* STATEMENT */
 
     .statement-section {
 
-        min-height: 70vh;
+        min-height: 65vh;
 
         padding:
             100px 22px;
     }
+
 
     .statement-content h2 {
 
@@ -1919,12 +1774,14 @@ footer {
             13vw;
     }
 
+
     .statement-content > p {
 
         margin-left: 0;
 
         margin-top: 38px;
     }
+
 
 
     /* CONTACT */
@@ -1937,11 +1794,21 @@ footer {
             100px 22px;
     }
 
+
     .contact-left h2 {
 
         font-size:
             13vw;
     }
+
+
+    .company-name {
+
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
 
 
     /* FOOTER */
@@ -1954,10 +1821,12 @@ footer {
             28px 22px;
     }
 
+
     .footer-logo {
 
         margin-bottom: 22px;
     }
+
 
     .footer-info {
 
@@ -1966,7 +1835,9 @@ footer {
         line-height: 2.2;
     }
 
+
     .footer-info span {
+
         display: block;
     }
 
