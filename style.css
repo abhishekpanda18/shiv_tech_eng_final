@@ -15,13 +15,12 @@ html {
 body {
     background: #080b0d;
     color: #f2f5f4;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
+}
+
+body.modal-open {
+    overflow: hidden;
 }
 
 a {
@@ -54,7 +53,7 @@ button {
 
     z-index: 1000;
 
-    background: rgba(12, 16, 18, 0.42);
+    background: rgba(12, 16, 18, 0.45);
 
     border: 1px solid rgba(255,255,255,0.20);
 
@@ -64,8 +63,12 @@ button {
     -webkit-backdrop-filter: blur(22px) saturate(150%);
 
     box-shadow:
-        0 10px 40px rgba(0,0,0,0.20),
+        0 10px 40px rgba(0,0,0,0.25),
         inset 0 1px 0 rgba(255,255,255,0.05);
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
 }
 
 
@@ -76,6 +79,8 @@ button {
     align-items: center;
 
     width: 190px;
+
+    flex-shrink: 0;
 }
 
 .brand img {
@@ -84,11 +89,13 @@ button {
     width: 170px;
     height: auto;
 
+    max-height: 55px;
+
     object-fit: contain;
 }
 
 
-/* NAV LINKS */
+/* NAVIGATION LINKS */
 
 .nav-links {
     display: flex;
@@ -102,6 +109,8 @@ button {
 
 .nav-links a {
     position: relative;
+
+    white-space: nowrap;
 
     font-size: 12px;
     font-weight: 600;
@@ -148,6 +157,8 @@ button {
     gap: 12px;
 
     padding: 11px 17px;
+
+    flex-shrink: 0;
 
     border: 1px solid rgba(36,172,227,0.45);
 
@@ -215,6 +226,10 @@ button {
 }
 
 .hero-video {
+    position: absolute;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
 
@@ -224,6 +239,94 @@ button {
     object-position: center;
 
     background: #000;
+
+    transform-origin: center center;
+
+    will-change: transform;
+}
+
+
+/* =========================================
+   HERO TRANSITION
+========================================= */
+
+.hero-transition {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 32%;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 5;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(8,11,13,0.15) 25%,
+            rgba(8,11,13,0.65) 68%,
+            #0b1012 100%
+        );
+
+    will-change: opacity;
+}
+
+.transition-glow {
+    position: absolute;
+
+    left: -20%;
+    bottom: 7%;
+
+    width: 140%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 25%,
+            rgba(36,172,227,0.0) 35%,
+            rgba(36,172,227,0.95) 50%,
+            rgba(36,172,227,0.0) 65%,
+            transparent 75%,
+            transparent 100%
+        );
+
+    filter:
+        blur(1px)
+        drop-shadow(
+            0 0 12px rgba(36,172,227,0.75)
+        );
+
+    transform: translateX(-25%);
+
+    will-change: transform;
+}
+
+.transition-line {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(36,172,227,0.7),
+            transparent
+        );
+
+    opacity: 0.7;
 }
 
 
@@ -250,6 +353,8 @@ button {
 
     width: 24px;
     height: 1px;
+
+    flex-shrink: 0;
 
     background: #24ace3;
 
@@ -312,7 +417,6 @@ button {
     padding-top: 90px;
 }
 
-
 .about-title h2 {
     max-width: 850px;
 
@@ -358,7 +462,6 @@ button {
     color: rgba(242,245,244,0.57);
 }
 
-
 .about-divider {
     width: 100%;
     height: 1px;
@@ -373,7 +476,6 @@ button {
             transparent
         );
 }
-
 
 .about-small-note {
     display: flex;
@@ -403,7 +505,7 @@ button {
 
 
 /* =========================================
-   ABOUT PRINCIPLES
+   PRINCIPLES
 ========================================= */
 
 .about-principles {
@@ -416,7 +518,6 @@ button {
 
     margin-top: 100px;
 }
-
 
 .principle {
     position: relative;
@@ -444,9 +545,6 @@ button {
         box-shadow 0.45s ease;
 }
 
-
-/* GLOW */
-
 .principle::before {
     content: "";
 
@@ -469,9 +567,6 @@ button {
         transform 0.45s ease;
 }
 
-
-/* BOTTOM ACCENT */
-
 .principle::after {
     content: "";
 
@@ -490,9 +585,6 @@ button {
 
     transition: width 0.45s ease;
 }
-
-
-/* HOVER */
 
 .principle:hover {
     transform:
@@ -523,9 +615,6 @@ button {
     width: calc(100% - 60px);
 }
 
-
-/* NUMBER */
-
 .principle > span {
     display: block;
 
@@ -548,9 +637,6 @@ button {
 
     transform: translateX(4px);
 }
-
-
-/* TITLE */
 
 .principle h3 {
     position: relative;
@@ -575,9 +661,6 @@ button {
 
     transform: translateX(4px);
 }
-
-
-/* DESCRIPTION */
 
 .principle p {
     position: relative;
@@ -617,9 +700,6 @@ button {
     border-top: 1px solid rgba(255,255,255,0.07);
 }
 
-
-/* HEADING */
-
 .products-heading {
     display: flex;
 
@@ -658,7 +738,6 @@ button {
 
     color: rgba(255,255,255,0.48);
 }
-
 
 .product-range-number {
     text-align: right;
@@ -700,9 +779,6 @@ button {
     gap: 18px;
 }
 
-
-/* PRODUCT CARD */
-
 .product-card {
     position: relative;
 
@@ -741,7 +817,7 @@ button {
 }
 
 
-/* IMAGE */
+/* PRODUCT IMAGE */
 
 .product-image {
     position: relative;
@@ -756,7 +832,6 @@ button {
 
     background: #f1f1ee;
 }
-
 
 .product-image::after {
     content: "";
@@ -774,7 +849,6 @@ button {
 
     pointer-events: none;
 }
-
 
 .product-image img {
     width: 100%;
@@ -810,7 +884,6 @@ button {
     border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-
 .product-number {
     position: absolute;
 
@@ -823,7 +896,6 @@ button {
 
     color: rgba(255,255,255,0.25);
 }
-
 
 .product-name {
     margin: 0;
@@ -850,7 +922,6 @@ button {
 
     transform: translateX(3px);
 }
-
 
 .product-description {
     margin-top: 8px;
@@ -898,7 +969,6 @@ button {
     opacity: 1;
 }
 
-
 .modal-backdrop {
     position: absolute;
 
@@ -909,7 +979,6 @@ button {
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
-
 
 .modal-window {
     position: relative;
@@ -1095,7 +1164,6 @@ button {
     border-top: 1px solid rgba(255,255,255,0.07);
 }
 
-
 .statement-grid {
     position: absolute;
 
@@ -1124,7 +1192,6 @@ button {
             transparent
         );
 }
-
 
 .statement-content {
     position: relative;
@@ -1192,7 +1259,6 @@ button {
     border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-
 .contact-left {
     padding-top: 15px;
 }
@@ -1217,9 +1283,6 @@ button {
     color: #24ace3;
 }
 
-
-/* CONTACT RIGHT */
-
 .contact-right {
     display: flex;
 
@@ -1242,7 +1305,7 @@ button {
 
 
 /* =========================================
-   PREMIUM ADDRESS CARD
+   ADDRESS CARD
 ========================================= */
 
 .address-card {
@@ -1278,9 +1341,6 @@ button {
         box-shadow 0.4s ease;
 }
 
-
-/* BLUE GLOW */
-
 .address-card::before {
     content: "";
 
@@ -1301,9 +1361,6 @@ button {
     transition: opacity 0.45s ease;
 }
 
-
-/* LEFT ACCENT */
-
 .address-card::after {
     content: "";
 
@@ -1321,7 +1378,6 @@ button {
         0 0 18px rgba(36,172,227,0.5);
 }
 
-
 .address-card:hover {
     transform: translateY(-6px);
 
@@ -1335,9 +1391,6 @@ button {
 .address-card:hover::before {
     opacity: 1;
 }
-
-
-/* TOP ROW */
 
 .address-card-top {
     position: relative;
@@ -1384,12 +1437,8 @@ button {
 .address-card:hover .address-arrow {
     color: #24ace3;
 
-    transform:
-        translate(4px,-4px);
+    transform: translate(4px,-4px);
 }
-
-
-/* DIVIDER */
 
 .address-card-line {
     width: 100%;
@@ -1405,9 +1454,6 @@ button {
             transparent
         );
 }
-
-
-/* ADDRESS CONTENT */
 
 .address-card-content {
     position: relative;
@@ -1516,7 +1562,6 @@ footer {
     border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-
 .footer-logo img {
     width: 150px;
 
@@ -1524,7 +1569,6 @@ footer {
 
     opacity: 0.72;
 }
-
 
 .footer-info {
     display: flex;
@@ -1540,10 +1584,15 @@ footer {
 
 
 /* =========================================
-   RESPONSIVE
+   TABLET
 ========================================= */
 
 @media (max-width: 1100px) {
+
+    .navbar {
+        left: 2vw;
+        right: 2vw;
+    }
 
     .nav-links {
         gap: 28px;
@@ -1573,12 +1622,11 @@ footer {
 }
 
 
-@media (max-width: 950px) {
+/* =========================================
+   SMALL TABLET
+========================================= */
 
-    .navbar {
-        left: 2vw;
-        right: 2vw;
-    }
+@media (max-width: 950px) {
 
     .brand {
         width: 155px;
@@ -1619,37 +1667,75 @@ footer {
 }
 
 
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 700px) {
 
-    /* NAV */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+
+    /* -------------------------------------
+       NAVIGATION
+    ------------------------------------- */
 
     .navbar {
-        height: 64px;
+        top: 10px;
 
-        padding: 0 15px;
+        left: 10px;
+        right: 10px;
+
+        height: 58px;
+
+        padding: 0 12px;
 
         border-radius: 13px;
+
+        background: rgba(10,14,16,0.68);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .brand {
         width: auto;
+
+        flex: 0 0 auto;
     }
 
     .brand img {
-        width: 125px;
+        width: 112px;
+
+        max-height: 44px;
     }
 
     .nav-links {
-        gap: 14px;
+        flex: 1;
 
-        margin-left: auto;
-        margin-right: 12px;
+        justify-content: flex-end;
+
+        gap: 13px;
+
+        margin-left: 10px;
+        margin-right: 0;
     }
 
     .nav-links a {
         font-size: 8px;
 
-        letter-spacing: 0.10em;
+        letter-spacing: 0.08em;
+    }
+
+    .nav-links a::after {
+        bottom: -6px;
     }
 
     .nav-contact {
@@ -1657,157 +1743,577 @@ footer {
     }
 
 
-    /* HERO */
+    /* -------------------------------------
+       HERO
+    ------------------------------------- */
 
     .hero-scroll {
         height: 230vh;
     }
 
+    .hero-sticky {
+        height: 100svh;
+        min-height: 560px;
+    }
 
-    /* ABOUT */
+    .hero-video {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        /*
+           Keeps the video filling the phone
+           while maintaining its centre.
+        */
+        object-position: center center;
+    }
+
+    .hero-transition {
+        height: 40%;
+    }
+
+    .transition-glow {
+        bottom: 6%;
+    }
+
+
+    /* -------------------------------------
+       SECTION LABEL
+    ------------------------------------- */
+
+    .section-label {
+        gap: 9px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.16em;
+    }
+
+    .section-label span {
+        width: 18px;
+    }
+
+
+    /* -------------------------------------
+       ABOUT
+    ------------------------------------- */
 
     .about-section {
-        padding: 90px 6vw 100px;
+        padding:
+            80px
+            6vw
+            90px;
     }
 
     .about-topline {
-        align-items: flex-start;
+        padding-bottom: 20px;
+    }
+
+    .section-code {
+        font-size: 8px;
+    }
+
+    .about-intro {
+        display: block;
+
+        padding-top: 55px;
     }
 
     .about-title h2 {
-        font-size: 48px;
+        font-size: clamp(43px, 12vw, 62px);
+
+        line-height: 0.92;
+
+        letter-spacing: -0.055em;
+    }
+
+    .about-text {
+        max-width: none;
+
+        padding-top: 45px;
     }
 
     .about-lead {
-        font-size: 19px;
+        font-size: 18px;
+
+        line-height: 1.5;
+
+        margin-bottom: 22px;
+    }
+
+    .about-text > p:not(.about-lead) {
+        font-size: 13px;
+
+        line-height: 1.8;
+    }
+
+    .about-divider {
+        margin: 30px 0 20px;
+    }
+
+    .about-small-note {
+        gap: 15px;
     }
 
 
-    /* PRINCIPLES */
+    /* -------------------------------------
+       PRINCIPLES
+    ------------------------------------- */
 
     .about-principles {
         grid-template-columns: 1fr;
 
-        margin-top: 70px;
+        margin-top: 65px;
     }
 
     .principle {
-        min-height: 230px;
+        min-height: 205px;
+
+        padding: 27px 24px;
+    }
+
+    .principle > span {
+        margin-bottom: 35px;
+
+        font-size: 9px;
+    }
+
+    .principle h3 {
+        font-size: 20px;
+
+        margin-bottom: 12px;
+    }
+
+    .principle p {
+        max-width: 270px;
+
+        font-size: 12px;
+
+        line-height: 1.65;
+    }
+
+    /*
+       Disable desktop scale hover on touch
+       devices.
+    */
+
+    .principle:hover {
+        transform: none;
     }
 
 
-    /* PRODUCTS */
+    /* -------------------------------------
+       PRODUCTS
+    ------------------------------------- */
 
     .products-section {
-        padding: 90px 6vw 100px;
+        padding:
+            80px
+            6vw
+            100px;
+    }
+
+    .products-heading {
+        margin-bottom: 45px;
+
+        gap: 24px;
     }
 
     .products-heading h2 {
-        font-size: 48px;
+        font-size: clamp(43px, 12vw, 62px);
+
+        line-height: 0.92;
     }
+
+    .products-heading p {
+        margin-top: 20px;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+    .product-range-number {
+        display: none;
+    }
+
+
+    /* PRODUCT GRID */
 
     .product-grid {
         grid-template-columns: 1fr;
 
-        gap: 14px;
+        gap: 13px;
     }
 
     .product-card {
-        min-height: 310px;
+        min-height: 0;
+
+        border-radius: 2px;
+    }
+
+    .product-card:hover {
+        transform: none;
     }
 
     .product-image {
-        height: 220px;
+        height: 205px;
+    }
+
+    .product-image img {
+        transform: scale(1.30);
+    }
+
+    .product-card:hover .product-image img {
+        transform: scale(1.30);
+    }
+
+    .product-info {
+        min-height: 105px;
+
+        padding:
+            18px
+            19px
+            19px;
     }
 
     .product-name {
-        font-size: 19px;
+        padding-right: 35px;
+
+        font-size: 18px;
+
+        line-height: 1.3;
+    }
+
+    .product-description {
+        font-size: 10px;
+
+        margin-top: 7px;
+    }
+
+    .product-number {
+        top: 18px;
+        right: 18px;
+
+        font-size: 8px;
     }
 
 
-    /* MODAL */
+    /* -------------------------------------
+       PRODUCT MODAL
+    ------------------------------------- */
 
     .product-modal {
-        padding: 12px;
+        padding: 8px;
     }
 
     .modal-window {
         width: 100%;
 
-        max-height: 94vh;
+        max-width: 100%;
 
-        padding: 28px 20px;
+        max-height: 94svh;
+
+        padding:
+            27px
+            17px
+            25px;
+
+        border-radius: 4px;
+    }
+
+    .modal-close {
+        top: 13px;
+        right: 13px;
+
+        width: 37px;
+        height: 37px;
+
+        font-size: 23px;
     }
 
     .modal-header {
         align-items: flex-start;
 
         flex-direction: column;
+
+        gap: 20px;
+
+        padding-right: 45px;
+
+        padding-bottom: 22px;
+    }
+
+    .modal-number {
+        margin-bottom: 8px;
+
+        font-size: 8px;
+    }
+
+    .modal-header h2 {
+        font-size: 30px;
+
+        line-height: 1.05;
+    }
+
+    .modal-heading-label {
+        font-size: 7px;
+
+        letter-spacing: 0.15em;
     }
 
     .modal-pages {
         grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        padding-top: 20px;
+    }
+
+    .modal-page-label {
+        padding: 10px 12px;
+
+        font-size: 8px;
     }
 
 
-    /* STATEMENT */
+    /* -------------------------------------
+       STATEMENT
+    ------------------------------------- */
 
     .statement-section {
-        min-height: 520px;
+        min-height: 500px;
 
-        padding: 90px 6vw;
+        padding:
+            85px
+            6vw;
+
+        align-items: center;
     }
 
     .statement-content h2 {
-        font-size: 48px;
+        margin-top: 27px;
+
+        font-size: clamp(43px, 12vw, 62px);
+
+        line-height: 0.94;
+    }
+
+    .statement-content p {
+        margin-top: 30px;
+
+        font-size: 12px;
+
+        line-height: 1.7;
+    }
+
+    .statement-grid {
+        background-size: 50px 50px;
     }
 
 
-    /* CONTACT */
+    /* -------------------------------------
+       CONTACT
+    ------------------------------------- */
 
     .contact-section {
-        padding: 100px 6vw;
+        grid-template-columns: 1fr;
 
         gap: 55px;
+
+        padding:
+            90px
+            6vw
+            100px;
+    }
+
+    .contact-left {
+        padding-top: 0;
     }
 
     .contact-left h2 {
-        font-size: 48px;
+        margin-top: 27px;
+
+        font-size: clamp(43px, 12vw, 62px);
+
+        line-height: 0.94;
     }
+
+    .company-name {
+        margin-bottom: 22px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.14em;
+    }
+
+
+    /* ADDRESS */
 
     .address-card {
-        padding: 25px 24px 28px;
-    }
+        padding:
+            23px
+            20px
+            26px;
 
-    .address-card-content p {
-        font-size: 15px;
-
-        line-height: 1.65;
+        margin-bottom: 30px;
     }
 
     .address-card-top {
-        gap: 12px;
+        gap: 10px;
+    }
+
+    .address-index {
+        font-size: 9px;
+    }
+
+    .address-label {
+        font-size: 9px;
+
+        letter-spacing: 0.16em;
+    }
+
+    .address-arrow {
+        font-size: 18px;
+    }
+
+    .address-card-line {
+        margin: 19px 0 20px;
+    }
+
+    .address-small {
+        font-size: 8px;
+
+        margin-bottom: 11px;
+    }
+
+    .address-card-content p {
+        font-size: 13px;
+
+        line-height: 1.75;
+    }
+
+    .address-card:hover {
+        transform: none;
+    }
+
+
+    /* PHONE */
+
+    .contact-label {
+        font-size: 8px;
+
+        margin-bottom: 10px;
     }
 
     .phone-block a {
-        font-size: 21px;
+        font-size: 19px;
+
+        gap: 10px;
     }
 
 
-    /* FOOTER */
+    /* -------------------------------------
+       FOOTER
+    ------------------------------------- */
 
     footer {
         align-items: flex-start;
 
         flex-direction: column;
 
-        padding: 35px 6vw;
+        gap: 25px;
+
+        padding:
+            35px
+            6vw;
+    }
+
+    .footer-logo img {
+        width: 125px;
     }
 
     .footer-info {
         flex-direction: column;
 
-        gap: 12px;
+        gap: 10px;
+
+        font-size: 7px;
+
+        line-height: 1.5;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+    .navbar {
+        left: 7px;
+        right: 7px;
+
+        padding: 0 9px;
+    }
+
+    .brand img {
+        width: 100px;
+    }
+
+    .nav-links {
+        gap: 9px;
+    }
+
+    .nav-links a {
+        font-size: 7px;
+    }
+
+    .about-title h2,
+    .products-heading h2,
+    .statement-content h2,
+    .contact-left h2 {
+        font-size: 40px;
+    }
+
+    .product-image {
+        height: 185px;
+    }
+
+    .address-card-content p {
+        font-size: 12px;
+    }
+
+    .phone-block a {
+        font-size: 17px;
+    }
+
+}
+
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .nav-links a::after {
+        display: none;
+    }
+
+    .principle:hover {
+        transform: none;
+    }
+
+    .product-card:hover {
+        transform: none;
+    }
+
+    .address-card:hover {
+        transform: none;
     }
 
 }

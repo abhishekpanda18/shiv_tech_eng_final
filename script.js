@@ -4,13 +4,18 @@
 
 const video = document.getElementById("heroVideo");
 const heroSection = document.querySelector(".hero-scroll");
+const heroTransition = document.querySelector(".hero-transition");
+const transitionGlow = document.querySelector(".transition-glow");
 
 let target = 0;
 let current = 0;
+
 let animationFrame = null;
 
 
-/* Get scroll position */
+/* -----------------------------------------
+   GET HERO SCROLL PROGRESS
+----------------------------------------- */
 
 function updateTarget() {
 
@@ -21,11 +26,11 @@ function updateTarget() {
     const rect =
         heroSection.getBoundingClientRect();
 
-    const max =
+    const maxScroll =
         heroSection.offsetHeight -
         window.innerHeight;
 
-    if (max <= 0) {
+    if (maxScroll <= 0) {
         return;
     }
 
@@ -34,27 +39,41 @@ function updateTarget() {
             0,
             Math.min(
                 1,
-                -rect.top / max
+                -rect.top / maxScroll
             )
         );
 
+
     if (!animationFrame) {
+
         animationFrame =
             requestAnimationFrame(
-                renderVideo
+                renderHero
             );
+
     }
+
 }
 
 
-/* Smoothly move video */
+/* -----------------------------------------
+   RENDER HERO
+----------------------------------------- */
 
-function renderVideo() {
+function renderHero() {
 
     animationFrame = null;
 
+
+    /* Smooth scrolling */
+
     current +=
-        (target - current) * 0.12;
+        (target - current) * 0.11;
+
+
+    /* -------------------------------------
+       VIDEO
+    ------------------------------------- */
 
     if (
         video &&
@@ -70,7 +89,85 @@ function renderVideo() {
 
         video.currentTime =
             current * duration;
+
     }
+
+
+    /* -------------------------------------
+       CINEMATIC TRANSITION
+    ------------------------------------- */
+
+    /*
+       Transition starts during the last
+       13% of the hero scroll.
+    */
+
+    const transitionStart = 0.87;
+
+    let transitionProgress =
+        (current - transitionStart) /
+        (1 - transitionStart);
+
+    transitionProgress =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                transitionProgress
+            )
+        );
+
+
+    if (heroTransition) {
+
+        /*
+           Smooth fade into the About section.
+        */
+
+        const fade =
+            transitionProgress *
+            transitionProgress;
+
+        heroTransition.style.opacity =
+            fade.toFixed(3);
+
+    }
+
+
+    if (transitionGlow) {
+
+        /*
+           Blue light sweeps across the
+           screen during the transition.
+        */
+
+        const sweep =
+            -35 +
+            transitionProgress * 135;
+
+        transitionGlow.style.transform =
+            `translateX(${sweep}%)`;
+
+    }
+
+
+    /* -------------------------------------
+       SUBTLE FINAL VIDEO ZOOM
+    ------------------------------------- */
+
+    if (video) {
+
+        const zoom =
+            1 +
+            transitionProgress * 0.045;
+
+        video.style.transform =
+            `scale(${zoom})`;
+
+    }
+
+
+    /* Continue animation */
 
     if (
         Math.abs(
@@ -80,13 +177,17 @@ function renderVideo() {
 
         animationFrame =
             requestAnimationFrame(
-                renderVideo
+                renderHero
             );
+
     }
+
 }
 
 
-/* Events */
+/* -----------------------------------------
+   EVENTS
+----------------------------------------- */
 
 window.addEventListener(
     "scroll",
@@ -113,8 +214,11 @@ if (video) {
         "canplay",
         updateTarget
     );
+
 }
 
+
+/* Initial */
 
 updateTarget();
 
@@ -462,7 +566,9 @@ const modalPages =
     );
 
 
-/* Open modal */
+/* -----------------------------------------
+   OPEN PRODUCT
+----------------------------------------- */
 
 function openProduct(product) {
 
@@ -490,7 +596,8 @@ function openProduct(product) {
                         >
 
                         <div class="modal-page-label">
-                            ${index === 0
+                            ${
+                                index === 0
                                 ? "PRODUCT"
                                 : `VIEW ${String(index + 1).padStart(2, "0")}`
                             }
@@ -512,12 +619,16 @@ function openProduct(product) {
         "false"
     );
 
-    document.body.style.overflow =
-        "hidden";
+    document.body.classList.add(
+        "modal-open"
+    );
+
 }
 
 
-/* Close modal */
+/* -----------------------------------------
+   CLOSE PRODUCT
+----------------------------------------- */
 
 function closeProduct() {
 
@@ -534,12 +645,16 @@ function closeProduct() {
         "true"
     );
 
-    document.body.style.overflow =
-        "";
+    document.body.classList.remove(
+        "modal-open"
+    );
+
 }
 
 
-/* Product click */
+/* -----------------------------------------
+   PRODUCT CLICK
+----------------------------------------- */
 
 if (productList) {
 
@@ -573,7 +688,7 @@ if (productList) {
     );
 
 
-    /* Keyboard accessibility */
+    /* Keyboard */
 
     productList.addEventListener(
         "keydown",
@@ -616,7 +731,9 @@ if (productList) {
 }
 
 
-/* Modal controls */
+/* =========================================
+   MODAL CONTROLS
+========================================= */
 
 if (modalClose) {
 
@@ -637,7 +754,9 @@ if (modalBackdrop) {
 }
 
 
-/* Escape key */
+/* =========================================
+   ESCAPE KEY
+========================================= */
 
 document.addEventListener(
     "keydown",
@@ -654,4 +773,24 @@ document.addEventListener(
         }
 
     }
-);  
+);
+
+
+/* =========================================
+   PREVENT ACCIDENTAL IMAGE DRAGGING
+========================================= */
+
+document.addEventListener(
+    "dragstart",
+    event => {
+
+        if (
+            event.target.tagName === "IMG"
+        ) {
+
+            event.preventDefault();
+
+        }
+
+    }
+);
