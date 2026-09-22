@@ -319,7 +319,7 @@ const products = [
 
         images: [
             "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32.jpeg",
-            "products/pin plunger/WhatsApp Imannnge 2026-09-17 at 19.01.32.jpeg"
+            "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32_1.jpeg"
         ]
     },
 
@@ -337,7 +337,7 @@ const products = [
 
         images: [
             "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33.jpeg",
-            "products/shoulder bolt_ stripper bolt/WhatsApp Imn kjage 2026-09-17 at 19.01.33.jpeg"
+            "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33_1.jpeg"
         ]
     },
 
@@ -355,7 +355,7 @@ const products = [
 
         images: [
             "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34.jpeg",
-            "products/quick ball lock pin/WhatsApp Imagebn kj 2026-09-17 at 19.01.34.jpeg"
+            "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34_1.jpeg"
         ]
     }
 
@@ -654,4 +654,4 @@ document.addEventListener(
         }
 
     }
-);
+);  

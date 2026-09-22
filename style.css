@@ -41,72 +41,74 @@ button {
 .navbar {
     position: fixed;
 
-    top: 20px;
-    left: 4vw;
-    right: 4vw;
-
-    z-index: 1000;
+    top: 18px;
+    left: 3vw;
+    right: 3vw;
 
     height: 70px;
 
     display: flex;
-
     align-items: center;
 
-    padding: 0 18px;
+    padding: 0 22px;
 
-    background: rgba(8, 11, 13, 0.78);
+    z-index: 1000;
 
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(12, 16, 18, 0.42);
 
-    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.20);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    border-radius: 16px;
+
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,0.25);
+        0 10px 40px rgba(0,0,0,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 
+/* LOGO */
+
 .brand {
     display: flex;
-
     align-items: center;
 
     width: 190px;
 }
 
 .brand img {
-    width: 165px;
+    display: block;
 
+    width: 170px;
     height: auto;
 
-    display: block;
+    object-fit: contain;
 }
 
 
+/* NAV LINKS */
+
 .nav-links {
     display: flex;
-
     align-items: center;
 
-    gap: 35px;
+    gap: 48px;
 
     margin-left: auto;
-    margin-right: 35px;
+    margin-right: 48px;
 }
 
 .nav-links a {
     position: relative;
 
-    font-size: 9px;
-
+    font-size: 12px;
     font-weight: 600;
 
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
 
-    color: rgba(255,255,255,0.58);
+    color: rgba(255,255,255,0.70);
 
     transition:
         color 0.3s ease;
@@ -118,15 +120,14 @@ button {
     position: absolute;
 
     left: 0;
-    bottom: -7px;
+    bottom: -8px;
 
     width: 0;
     height: 1px;
 
     background: #24ace3;
 
-    transition:
-        width 0.3s ease;
+    transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -138,53 +139,53 @@ button {
 }
 
 
+/* ENQUIRE */
+
 .nav-contact {
     display: flex;
-
     align-items: center;
 
-    gap: 10px;
+    gap: 12px;
 
     padding: 11px 17px;
 
     border: 1px solid rgba(36,172,227,0.45);
 
+    border-radius: 8px;
+
     color: #ffffff;
 
-    font-size: 9px;
-
+    font-size: 11px;
     font-weight: 600;
 
-    letter-spacing: 0.13em;
+    letter-spacing: 0.15em;
 
     background: rgba(36,172,227,0.06);
 
     transition:
         background 0.3s ease,
         border-color 0.3s ease,
-        color 0.3s ease;
+        transform 0.3s ease;
 }
 
 .nav-contact span {
+    font-size: 17px;
+
     color: #24ace3;
 
-    font-size: 14px;
-
-    transition:
-        transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .nav-contact:hover {
     background: rgba(36,172,227,0.13);
 
-    border-color: rgba(36,172,227,0.8);
+    border-color: rgba(36,172,227,0.75);
 
-    color: #24ace3;
+    transform: translateY(-2px);
 }
 
 .nav-contact:hover span {
-    transform:
-        translate(3px,-3px);
+    transform: translate(2px,-2px);
 }
 
 
@@ -262,47 +263,62 @@ button {
 ========================================= */
 
 .about-section {
-    padding: 150px 7vw 150px;
+    position: relative;
 
-    background: #080b0d;
+    padding: 130px 7vw 140px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0b1012 0%,
+            #0a0f11 100%
+        );
 
     border-top: 1px solid rgba(255,255,255,0.07);
 }
 
 
+/* TOPLINE */
+
 .about-topline {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
 .section-code {
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: 600;
 
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
 
     color: rgba(255,255,255,0.30);
 }
 
 
+/* INTRO */
+
 .about-intro {
     display: grid;
 
-    grid-template-columns:
-        1.1fr 0.9fr;
+    grid-template-columns: 1.15fr 0.85fr;
 
-    gap: 9vw;
+    gap: 10vw;
 
-    margin-top: 70px;
+    padding-top: 90px;
 }
 
 
 .about-title h2 {
-    font-size: clamp(48px, 6vw, 92px);
+    max-width: 850px;
 
-    line-height: 0.92;
+    font-size: clamp(48px, 6.2vw, 105px);
+
+    line-height: 0.94;
 
     font-weight: 600;
 
@@ -316,30 +332,30 @@ button {
 }
 
 
+/* ABOUT TEXT */
+
 .about-text {
     padding-top: 10px;
+
+    max-width: 500px;
 }
 
 .about-lead {
-    max-width: 570px;
-
     font-size: 22px;
 
     line-height: 1.45;
 
     color: #f2f5f4;
+
+    margin-bottom: 30px;
 }
 
 .about-text > p:not(.about-lead) {
-    max-width: 500px;
-
-    margin-top: 28px;
-
     font-size: 14px;
 
-    line-height: 1.8;
+    line-height: 1.85;
 
-    color: rgba(255,255,255,0.48);
+    color: rgba(242,245,244,0.57);
 }
 
 
@@ -1644,27 +1660,7 @@ footer {
     /* HERO */
 
     .hero-scroll {
-        /*
-         * Keep enough scroll distance for the full 8-second animation,
-         * while using the stable mobile viewport height.
-         */
-        height: 250svh;
-    }
-
-    .hero-sticky {
-        height: 100svh;
-    }
-
-    .hero-video {
-        /*
-         * The source video is 16:9. On a portrait phone, "cover" crops
-         * the sides and can hide important parts of the animation.
-         * "contain" keeps the complete animation visible and centered.
-         */
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: center center;
+        height: 230vh;
     }
 
 
