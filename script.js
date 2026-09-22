@@ -1,5 +1,6 @@
 /* =========================================
    RESPONSIVE HERO SCROLL VIDEO
+   SMOOTH MOBILE SEEK ENGINE
 ========================================= */
 
 const desktopVideo =
@@ -45,8 +46,43 @@ let current = 0;
 
 let animationFrame = null;
 
-let lastVideoTime = -1;
-let lastVideoUpdate = 0;
+
+/* -----------------------------------------
+   DESKTOP VIDEO STATE
+----------------------------------------- */
+
+let desktopLastTime = -1;
+
+
+/* -----------------------------------------
+   MOBILE VIDEO STATE
+
+   Prevents multiple video seeks from
+   stacking up on mobile.
+----------------------------------------- */
+
+let mobileTargetTime = 0;
+let mobileDisplayedTime = -1;
+
+let mobileIsSeeking = false;
+let mobileSeekQueued = false;
+
+let mobileLastSeekTime = 0;
+
+
+/*
+   Minimum time between mobile seeks.
+
+   This prevents the browser from being
+   flooded with currentTime requests.
+*/
+const MOBILE_SEEK_INTERVAL = 45;
+
+
+/*
+   Ignore extremely tiny time changes.
+*/
+const MOBILE_SEEK_THRESHOLD = 0.035;
 
 
 /* -----------------------------------------
@@ -81,7 +117,166 @@ function updateTarget() {
     if (!animationFrame) {
 
         animationFrame =
-            requestAnimationFrame(renderHero);
+            requestAnimationFrame(
+                renderHero
+            );
+    }
+}
+
+
+/* -----------------------------------------
+   MOBILE SEEK
+----------------------------------------- */
+
+function requestMobileSeek(video, time) {
+
+    if (!video) {
+        return;
+    }
+
+    if (
+        video.readyState < 2 ||
+        !Number.isFinite(video.duration)
+    ) {
+        return;
+    }
+
+
+    const duration =
+        Math.max(
+            0,
+            video.duration - 0.03
+        );
+
+
+    mobileTargetTime =
+        Math.max(
+            0,
+            Math.min(
+                duration,
+                time
+            )
+        );
+
+
+    /*
+       If a seek is already happening,
+       don't start another one.
+
+       Just remember that a newer target
+       exists.
+    */
+
+    if (mobileIsSeeking) {
+
+        mobileSeekQueued = true;
+
+        return;
+    }
+
+
+    const now =
+        performance.now();
+
+
+    /*
+       Prevent extremely frequent seeks.
+    */
+
+    if (
+        now - mobileLastSeekTime <
+        MOBILE_SEEK_INTERVAL
+    ) {
+
+        mobileSeekQueued = true;
+
+        return;
+    }
+
+
+    const difference =
+        Math.abs(
+            mobileTargetTime -
+            mobileDisplayedTime
+        );
+
+
+    if (
+        difference <
+        MOBILE_SEEK_THRESHOLD
+    ) {
+
+        return;
+    }
+
+
+    mobileIsSeeking = true;
+    mobileSeekQueued = false;
+
+    mobileLastSeekTime = now;
+
+
+    /*
+       fastSeek() allows the browser to
+       seek using a nearby keyframe when
+       supported.
+
+       For smaller movements we use
+       currentTime for better accuracy.
+    */
+
+    if (
+        typeof video.fastSeek === "function" &&
+        Math.abs(
+            mobileTargetTime -
+            video.currentTime
+        ) > 0.08
+    ) {
+
+        video.fastSeek(
+            mobileTargetTime
+        );
+
+    } else {
+
+        video.currentTime =
+            mobileTargetTime;
+    }
+}
+
+
+/* -----------------------------------------
+   MOBILE SEEK COMPLETE
+----------------------------------------- */
+
+function handleMobileSeeked() {
+
+    if (!mobileVideo) {
+        return;
+    }
+
+
+    mobileIsSeeking = false;
+
+
+    mobileDisplayedTime =
+        mobileVideo.currentTime;
+
+
+    /*
+       If the user scrolled while the
+       previous seek was happening,
+       process the newest target.
+    */
+
+    if (mobileSeekQueued) {
+
+        mobileSeekQueued = false;
+
+        requestMobileSeek(
+            mobileVideo,
+            mobileTargetTime
+        );
     }
 }
 
@@ -90,15 +285,17 @@ function updateTarget() {
    HERO VIDEO RENDER
 ----------------------------------------- */
 
-function renderHero(timestamp) {
+function renderHero() {
 
     animationFrame = null;
+
 
     const mobile =
         isMobile();
 
     const video =
         getActiveVideo();
+
 
     if (!video) {
         return;
@@ -111,11 +308,15 @@ function renderHero(timestamp) {
 
     current +=
         (target - current) *
-        (mobile ? 0.20 : 0.12);
+        (
+            mobile
+                ? 0.16
+                : 0.12
+        );
 
 
     /* -------------------------------------
-       VIDEO SCRUB
+       VIDEO
     ------------------------------------- */
 
     if (
@@ -129,66 +330,50 @@ function renderHero(timestamp) {
                 video.duration - 0.03
             );
 
+
         const desiredTime =
             current * duration;
 
 
-        const timeDifference =
-            Math.abs(
-                desiredTime -
-                lastVideoTime
-            );
-
-
         /* ---------------------------------
            MOBILE VIDEO
-           Separate mobile animation.
         --------------------------------- */
 
         if (mobile) {
 
-            const enoughTimePassed =
-                timestamp -
-                lastVideoUpdate >= 40;
-
-
-            if (
-                timeDifference > 0.02 &&
-                enoughTimePassed
-            ) {
-
-                video.currentTime =
-                    desiredTime;
-
-                lastVideoTime =
-                    desiredTime;
-
-                lastVideoUpdate =
-                    timestamp;
-            }
-
+            requestMobileSeek(
+                video,
+                desiredTime
+            );
         }
 
 
         /* ---------------------------------
            DESKTOP VIDEO
-           Keep desktop animation smooth.
+
+           Desktop behaviour remains
+           essentially unchanged.
         --------------------------------- */
 
         else {
 
+            const difference =
+                Math.abs(
+                    desiredTime -
+                    desktopLastTime
+                );
+
+
             if (
-                timeDifference > 0.003
+                difference >
+                0.003
             ) {
 
                 video.currentTime =
                     desiredTime;
 
-                lastVideoTime =
+                desktopLastTime =
                     desiredTime;
-
-                lastVideoUpdate =
-                    timestamp;
             }
         }
     }
@@ -248,6 +433,19 @@ prepareVideo(mobileVideo);
 
 
 /* -----------------------------------------
+   MOBILE SEEK EVENT
+----------------------------------------- */
+
+if (mobileVideo) {
+
+    mobileVideo.addEventListener(
+        "seeked",
+        handleMobileSeeked
+    );
+}
+
+
+/* -----------------------------------------
    DEVICE CHANGE
 ----------------------------------------- */
 
@@ -263,9 +461,19 @@ function handleDeviceChange() {
 
     current = target;
 
-    lastVideoTime = -1;
 
-    lastVideoUpdate = 0;
+    desktopLastTime = -1;
+
+
+    mobileTargetTime = 0;
+
+    mobileDisplayedTime = -1;
+
+    mobileIsSeeking = false;
+
+    mobileSeekQueued = false;
+
+    mobileLastSeekTime = 0;
 
 
     if (
@@ -275,12 +483,29 @@ function handleDeviceChange() {
         )
     ) {
 
-        activeVideo.currentTime =
-            target *
+        const duration =
             Math.max(
                 0,
                 activeVideo.duration - 0.03
             );
+
+
+        const time =
+            target * duration;
+
+
+        activeVideo.currentTime =
+            time;
+
+
+        if (isMobile()) {
+
+            mobileTargetTime =
+                time;
+
+            mobileDisplayedTime =
+                time;
+        }
     }
 
 
@@ -296,7 +521,6 @@ if (
         "change",
         handleDeviceChange
     );
-
 }
 
 
@@ -494,7 +718,7 @@ const products = [
 
 
     /* =====================================
-       FIXED PRODUCT 11
+       PRODUCT 11
     ===================================== */
 
     {
@@ -515,7 +739,7 @@ const products = [
 
 
     /* =====================================
-       FIXED PRODUCT 12
+       PRODUCT 12
     ===================================== */
 
     {
@@ -536,7 +760,7 @@ const products = [
 
 
     /* =====================================
-       FIXED PRODUCT 13
+       PRODUCT 13
     ===================================== */
 
     {
@@ -571,6 +795,7 @@ function renderProducts() {
     if (!productList) {
         return;
     }
+
 
     productList.innerHTML =
         products.map(product => {
@@ -649,6 +874,7 @@ function openProduct(product) {
         return;
     }
 
+
     modalTitle.textContent =
         product.name;
 
@@ -690,7 +916,8 @@ function openProduct(product) {
         "false"
     );
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+        "hidden";
 }
 
 
@@ -700,14 +927,18 @@ function closeProduct() {
         return;
     }
 
-    productModal.classList.remove("active");
+
+    productModal.classList.remove(
+        "active"
+    );
 
     productModal.setAttribute(
         "aria-hidden",
         "true"
     );
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+        "";
 }
 
 
@@ -722,17 +953,23 @@ if (productList) {
         event => {
 
             const card =
-                event.target.closest(".product-card");
+                event.target.closest(
+                    ".product-card"
+                );
+
 
             if (!card) {
                 return;
             }
 
+
             const product =
                 products.find(
                     item =>
-                        item.number === card.dataset.product
+                        item.number ===
+                        card.dataset.product
                 );
+
 
             if (product) {
                 openProduct(product);
@@ -753,20 +990,28 @@ if (productList) {
                 return;
             }
 
+
             const card =
-                event.target.closest(".product-card");
+                event.target.closest(
+                    ".product-card"
+                );
+
 
             if (!card) {
                 return;
             }
 
+
             event.preventDefault();
+
 
             const product =
                 products.find(
                     item =>
-                        item.number === card.dataset.product
+                        item.number ===
+                        card.dataset.product
                 );
+
 
             if (product) {
                 openProduct(product);
@@ -782,19 +1027,26 @@ if (productList) {
 ========================================= */
 
 if (modalClose) {
+
     modalClose.addEventListener(
         "click",
         closeProduct
     );
 }
 
+
 if (modalBackdrop) {
+
     modalBackdrop.addEventListener(
         "click",
         closeProduct
     );
 }
 
+
+/* =========================================
+   ESCAPE KEY
+========================================= */
 
 document.addEventListener(
     "keydown",
@@ -803,8 +1055,11 @@ document.addEventListener(
         if (
             event.key === "Escape" &&
             productModal &&
-            productModal.classList.contains("active")
+            productModal.classList.contains(
+                "active"
+            )
         ) {
+
             closeProduct();
         }
 
