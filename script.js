@@ -4,18 +4,13 @@
 
 const video = document.getElementById("heroVideo");
 const heroSection = document.querySelector(".hero-scroll");
-const heroTransition = document.querySelector(".hero-transition");
-const transitionGlow = document.querySelector(".transition-glow");
 
 let target = 0;
 let current = 0;
-
 let animationFrame = null;
 
 
-/* -----------------------------------------
-   GET HERO SCROLL PROGRESS
------------------------------------------ */
+/* Get scroll position */
 
 function updateTarget() {
 
@@ -26,11 +21,11 @@ function updateTarget() {
     const rect =
         heroSection.getBoundingClientRect();
 
-    const maxScroll =
+    const max =
         heroSection.offsetHeight -
         window.innerHeight;
 
-    if (maxScroll <= 0) {
+    if (max <= 0) {
         return;
     }
 
@@ -39,41 +34,27 @@ function updateTarget() {
             0,
             Math.min(
                 1,
-                -rect.top / maxScroll
+                -rect.top / max
             )
         );
 
-
     if (!animationFrame) {
-
         animationFrame =
             requestAnimationFrame(
-                renderHero
+                renderVideo
             );
-
     }
-
 }
 
 
-/* -----------------------------------------
-   RENDER HERO
------------------------------------------ */
+/* Smoothly move video */
 
-function renderHero() {
+function renderVideo() {
 
     animationFrame = null;
 
-
-    /* Smooth scrolling */
-
     current +=
-        (target - current) * 0.11;
-
-
-    /* -------------------------------------
-       VIDEO
-    ------------------------------------- */
+        (target - current) * 0.12;
 
     if (
         video &&
@@ -89,85 +70,7 @@ function renderHero() {
 
         video.currentTime =
             current * duration;
-
     }
-
-
-    /* -------------------------------------
-       CINEMATIC TRANSITION
-    ------------------------------------- */
-
-    /*
-       Transition starts during the last
-       13% of the hero scroll.
-    */
-
-    const transitionStart = 0.87;
-
-    let transitionProgress =
-        (current - transitionStart) /
-        (1 - transitionStart);
-
-    transitionProgress =
-        Math.max(
-            0,
-            Math.min(
-                1,
-                transitionProgress
-            )
-        );
-
-
-    if (heroTransition) {
-
-        /*
-           Smooth fade into the About section.
-        */
-
-        const fade =
-            transitionProgress *
-            transitionProgress;
-
-        heroTransition.style.opacity =
-            fade.toFixed(3);
-
-    }
-
-
-    if (transitionGlow) {
-
-        /*
-           Blue light sweeps across the
-           screen during the transition.
-        */
-
-        const sweep =
-            -35 +
-            transitionProgress * 135;
-
-        transitionGlow.style.transform =
-            `translateX(${sweep}%)`;
-
-    }
-
-
-    /* -------------------------------------
-       SUBTLE FINAL VIDEO ZOOM
-    ------------------------------------- */
-
-    if (video) {
-
-        const zoom =
-            1 +
-            transitionProgress * 0.045;
-
-        video.style.transform =
-            `scale(${zoom})`;
-
-    }
-
-
-    /* Continue animation */
 
     if (
         Math.abs(
@@ -177,17 +80,13 @@ function renderHero() {
 
         animationFrame =
             requestAnimationFrame(
-                renderHero
+                renderVideo
             );
-
     }
-
 }
 
 
-/* -----------------------------------------
-   EVENTS
------------------------------------------ */
+/* Events */
 
 window.addEventListener(
     "scroll",
@@ -214,11 +113,8 @@ if (video) {
         "canplay",
         updateTarget
     );
-
 }
 
-
-/* Initial */
 
 updateTarget();
 
@@ -423,7 +319,7 @@ const products = [
 
         images: [
             "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32.jpeg",
-            "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32_1.jpeg"
+            "products/pin plunger/WhatsApp Imannnge 2026-09-17 at 19.01.32.jpeg"
         ]
     },
 
@@ -441,7 +337,7 @@ const products = [
 
         images: [
             "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33.jpeg",
-            "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33_1.jpeg"
+            "products/shoulder bolt_ stripper bolt/WhatsApp Imn kjage 2026-09-17 at 19.01.33.jpeg"
         ]
     },
 
@@ -459,7 +355,7 @@ const products = [
 
         images: [
             "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34.jpeg",
-            "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34_1.jpeg"
+            "products/quick ball lock pin/WhatsApp Imagebn kj 2026-09-17 at 19.01.34.jpeg"
         ]
     }
 
@@ -566,9 +462,7 @@ const modalPages =
     );
 
 
-/* -----------------------------------------
-   OPEN PRODUCT
------------------------------------------ */
+/* Open modal */
 
 function openProduct(product) {
 
@@ -596,8 +490,7 @@ function openProduct(product) {
                         >
 
                         <div class="modal-page-label">
-                            ${
-                                index === 0
+                            ${index === 0
                                 ? "PRODUCT"
                                 : `VIEW ${String(index + 1).padStart(2, "0")}`
                             }
@@ -619,16 +512,12 @@ function openProduct(product) {
         "false"
     );
 
-    document.body.classList.add(
-        "modal-open"
-    );
-
+    document.body.style.overflow =
+        "hidden";
 }
 
 
-/* -----------------------------------------
-   CLOSE PRODUCT
------------------------------------------ */
+/* Close modal */
 
 function closeProduct() {
 
@@ -645,16 +534,12 @@ function closeProduct() {
         "true"
     );
 
-    document.body.classList.remove(
-        "modal-open"
-    );
-
+    document.body.style.overflow =
+        "";
 }
 
 
-/* -----------------------------------------
-   PRODUCT CLICK
------------------------------------------ */
+/* Product click */
 
 if (productList) {
 
@@ -688,7 +573,7 @@ if (productList) {
     );
 
 
-    /* Keyboard */
+    /* Keyboard accessibility */
 
     productList.addEventListener(
         "keydown",
@@ -731,9 +616,7 @@ if (productList) {
 }
 
 
-/* =========================================
-   MODAL CONTROLS
-========================================= */
+/* Modal controls */
 
 if (modalClose) {
 
@@ -754,9 +637,7 @@ if (modalBackdrop) {
 }
 
 
-/* =========================================
-   ESCAPE KEY
-========================================= */
+/* Escape key */
 
 document.addEventListener(
     "keydown",
@@ -769,26 +650,6 @@ document.addEventListener(
         ) {
 
             closeProduct();
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   PREVENT ACCIDENTAL IMAGE DRAGGING
-========================================= */
-
-document.addEventListener(
-    "dragstart",
-    event => {
-
-        if (
-            event.target.tagName === "IMG"
-        ) {
-
-            event.preventDefault();
 
         }
 
