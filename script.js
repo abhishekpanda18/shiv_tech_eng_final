@@ -1,5 +1,5 @@
 /* =========================================
-   HERO SCROLL VIDEO
+   HERO SCROLL VIDEO — OPTIMIZED FOR MOBILE
 ========================================= */
 
 const video = document.getElementById("heroVideo");
@@ -8,6 +8,14 @@ const heroSection = document.querySelector(".hero-scroll");
 let target = 0;
 let current = 0;
 let animationFrame = null;
+let lastVideoTime = -1;
+let lastVideoUpdate = 0;
+
+const mobileQuery = window.matchMedia("(max-width: 700px)");
+
+function isMobile() {
+    return mobileQuery.matches;
+}
 
 
 /* -----------------------------------------
@@ -45,15 +53,17 @@ function updateTarget() {
 
 
 /* -----------------------------------------
-   SMOOTH VIDEO SCRUB
+   OPTIMIZED VIDEO SCRUB
 ----------------------------------------- */
 
-function renderVideo() {
+function renderVideo(timestamp) {
 
     animationFrame = null;
 
+    const mobile = isMobile();
+
     current +=
-        (target - current) * 0.12;
+        (target - current) * (mobile ? 0.18 : 0.12);
 
     if (
         video &&
@@ -67,8 +77,32 @@ function renderVideo() {
                 video.duration - 0.03
             );
 
-        video.currentTime =
+        const desiredTime =
             current * duration;
+
+        const timeDifference =
+            Math.abs(desiredTime - lastVideoTime);
+
+        /*
+           Mobile:
+           Limit video seeking to reduce lag.
+        */
+        const minInterval =
+            mobile ? 50 : 0;
+
+        const enoughTimePassed =
+            timestamp - lastVideoUpdate >= minInterval;
+
+        if (
+            timeDifference > (mobile ? 0.025 : 0.005) &&
+            enoughTimePassed
+        ) {
+
+            video.currentTime = desiredTime;
+
+            lastVideoTime = desiredTime;
+            lastVideoUpdate = timestamp;
+        }
     }
 
     if (
@@ -99,6 +133,10 @@ window.addEventListener(
 );
 
 if (video) {
+
+    video.preload = "auto";
+    video.playsInline = true;
+    video.muted = true;
 
     video.addEventListener(
         "loadedmetadata",
