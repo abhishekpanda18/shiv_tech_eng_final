@@ -10,44 +10,43 @@ let current = 0;
 let animationFrame = null;
 
 
-/* Get scroll position */
+/* -----------------------------------------
+   HERO SCROLL POSITION
+----------------------------------------- */
 
 function updateTarget() {
 
-    if (!heroSection) {
+    if (!heroSection || !video) {
         return;
     }
 
-    const rect =
-        heroSection.getBoundingClientRect();
+    const rect = heroSection.getBoundingClientRect();
 
-    const max =
-        heroSection.offsetHeight -
-        window.innerHeight;
+    const scrollDistance =
+        heroSection.offsetHeight - window.innerHeight;
 
-    if (max <= 0) {
+    if (scrollDistance <= 0) {
         return;
     }
 
-    target =
-        Math.max(
-            0,
-            Math.min(
-                1,
-                -rect.top / max
-            )
-        );
+    target = Math.max(
+        0,
+        Math.min(
+            1,
+            -rect.top / scrollDistance
+        )
+    );
 
     if (!animationFrame) {
         animationFrame =
-            requestAnimationFrame(
-                renderVideo
-            );
+            requestAnimationFrame(renderVideo);
     }
 }
 
 
-/* Smoothly move video */
+/* -----------------------------------------
+   SMOOTH VIDEO SCRUB
+----------------------------------------- */
 
 function renderVideo() {
 
@@ -73,20 +72,18 @@ function renderVideo() {
     }
 
     if (
-        Math.abs(
-            target - current
-        ) > 0.0005
+        Math.abs(target - current) > 0.0005
     ) {
 
         animationFrame =
-            requestAnimationFrame(
-                renderVideo
-            );
+            requestAnimationFrame(renderVideo);
     }
 }
 
 
-/* Events */
+/* -----------------------------------------
+   EVENTS
+----------------------------------------- */
 
 window.addEventListener(
     "scroll",
@@ -101,7 +98,6 @@ window.addEventListener(
     updateTarget
 );
 
-
 if (video) {
 
     video.addEventListener(
@@ -110,11 +106,10 @@ if (video) {
     );
 
     video.addEventListener(
-        "canplay",
+        "loadeddata",
         updateTarget
     );
 }
-
 
 updateTarget();
 
@@ -127,9 +122,7 @@ const products = [
 
     {
         number: "01",
-
         name: "Adjustable Handle",
-
         description:
             "Machine and fixture control components.",
 
@@ -146,9 +139,7 @@ const products = [
 
     {
         number: "02",
-
         name: "Ball Plunger",
-
         description:
             "Precision positioning and indexing.",
 
@@ -164,9 +155,7 @@ const products = [
 
     {
         number: "03",
-
         name: "Ball Lock Pin",
-
         description:
             "Fast, secure removable connections.",
 
@@ -182,9 +171,7 @@ const products = [
 
     {
         number: "04",
-
         name: "Die Spring",
-
         description:
             "High-cycle spring applications.",
 
@@ -200,9 +187,7 @@ const products = [
 
     {
         number: "05",
-
         name: "Dowel Pin",
-
         description:
             "Accurate alignment and locating.",
 
@@ -218,9 +203,7 @@ const products = [
 
     {
         number: "06",
-
         name: "Grub Screw",
-
         description:
             "Compact fastening solutions.",
 
@@ -236,9 +219,7 @@ const products = [
 
     {
         number: "07",
-
         name: "Hand Wheel",
-
         description:
             "Manual machine adjustment.",
 
@@ -254,9 +235,7 @@ const products = [
 
     {
         number: "08",
-
         name: "Indexing Plunger",
-
         description:
             "Reliable locking and indexing.",
 
@@ -272,9 +251,7 @@ const products = [
 
     {
         number: "09",
-
         name: "Leg Level",
-
         description:
             "Stable and adjustable machine support.",
 
@@ -290,9 +267,7 @@ const products = [
 
     {
         number: "10",
-
         name: "Mold Parting Lock",
-
         description:
             "Secure mold alignment and locking.",
 
@@ -306,11 +281,13 @@ const products = [
     },
 
 
+    /* =====================================
+       FIXED PRODUCT 11
+    ===================================== */
+
     {
         number: "11",
-
         name: "Pin Plunger",
-
         description:
             "Compact spring-loaded positioning.",
 
@@ -319,16 +296,19 @@ const products = [
 
         images: [
             "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32.jpeg",
-            "products/pin plunger/WhatsApp Image 2026-09-17 at 19.01.32_1.jpeg"
+
+            "products/pin plunger/WhatsApp Imannnge 2026-09-17 at 19.01.32.jpeg"
         ]
     },
 
 
+    /* =====================================
+       FIXED PRODUCT 12
+    ===================================== */
+
     {
         number: "12",
-
         name: "Shoulder Bolt / Stripper Bolt",
-
         description:
             "Precision mechanical fastening.",
 
@@ -337,16 +317,19 @@ const products = [
 
         images: [
             "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33.jpeg",
-            "products/shoulder bolt_ stripper bolt/WhatsApp Image 2026-09-17 at 19.01.33_1.jpeg"
+
+            "products/shoulder bolt_ stripper bolt/WhatsApp Imn kjage 2026-09-17 at 19.01.33.jpeg"
         ]
     },
 
 
+    /* =====================================
+       FIXED PRODUCT 13
+    ===================================== */
+
     {
         number: "13",
-
         name: "Quick Ball Lock Pin",
-
         description:
             "Rapid-release industrial fastening.",
 
@@ -355,7 +338,8 @@ const products = [
 
         images: [
             "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34.jpeg",
-            "products/quick ball lock pin/WhatsApp Image 2026-09-17 at 19.01.34_1.jpeg"
+
+            "products/quick ball lock pin/WhatsApp Imagebn kj 2026-09-17 at 19.01.34.jpeg"
         ]
     }
 
@@ -367,9 +351,7 @@ const products = [
 ========================================= */
 
 const productList =
-    document.getElementById(
-        "productList"
-    );
+    document.getElementById("productList");
 
 
 function renderProducts() {
@@ -399,7 +381,6 @@ function renderProducts() {
                         >
 
                     </div>
-
 
                     <div class="product-info">
 
@@ -432,37 +413,23 @@ renderProducts();
 ========================================= */
 
 const productModal =
-    document.getElementById(
-        "productModal"
-    );
+    document.getElementById("productModal");
 
 const modalBackdrop =
-    document.getElementById(
-        "modalBackdrop"
-    );
+    document.getElementById("modalBackdrop");
 
 const modalClose =
-    document.getElementById(
-        "modalClose"
-    );
+    document.getElementById("modalClose");
 
 const modalTitle =
-    document.getElementById(
-        "modalTitle"
-    );
+    document.getElementById("modalTitle");
 
 const modalNumber =
-    document.getElementById(
-        "modalNumber"
-    );
+    document.getElementById("modalNumber");
 
 const modalPages =
-    document.getElementById(
-        "modalPages"
-    );
+    document.getElementById("modalPages");
 
-
-/* Open modal */
 
 function openProduct(product) {
 
@@ -490,9 +457,10 @@ function openProduct(product) {
                         >
 
                         <div class="modal-page-label">
-                            ${index === 0
-                                ? "PRODUCT"
-                                : `VIEW ${String(index + 1).padStart(2, "0")}`
+                            ${
+                                index === 0
+                                    ? "PRODUCT"
+                                    : `VIEW ${String(index + 1).padStart(2, "0")}`
                             }
                         </div>
 
@@ -503,21 +471,16 @@ function openProduct(product) {
         ).join("");
 
 
-    productModal.classList.add(
-        "active"
-    );
+    productModal.classList.add("active");
 
     productModal.setAttribute(
         "aria-hidden",
         "false"
     );
 
-    document.body.style.overflow =
-        "hidden";
+    document.body.style.overflow = "hidden";
 }
 
-
-/* Close modal */
 
 function closeProduct() {
 
@@ -525,21 +488,20 @@ function closeProduct() {
         return;
     }
 
-    productModal.classList.remove(
-        "active"
-    );
+    productModal.classList.remove("active");
 
     productModal.setAttribute(
         "aria-hidden",
         "true"
     );
 
-    document.body.style.overflow =
-        "";
+    document.body.style.overflow = "";
 }
 
 
-/* Product click */
+/* =========================================
+   PRODUCT CLICK
+========================================= */
 
 if (productList) {
 
@@ -548,21 +510,16 @@ if (productList) {
         event => {
 
             const card =
-                event.target.closest(
-                    ".product-card"
-                );
+                event.target.closest(".product-card");
 
             if (!card) {
                 return;
             }
 
-            const number =
-                card.dataset.product;
-
             const product =
                 products.find(
                     item =>
-                        item.number === number
+                        item.number === card.dataset.product
                 );
 
             if (product) {
@@ -572,8 +529,6 @@ if (productList) {
         }
     );
 
-
-    /* Keyboard accessibility */
 
     productList.addEventListener(
         "keydown",
@@ -587,9 +542,7 @@ if (productList) {
             }
 
             const card =
-                event.target.closest(
-                    ".product-card"
-                );
+                event.target.closest(".product-card");
 
             if (!card) {
                 return;
@@ -597,13 +550,10 @@ if (productList) {
 
             event.preventDefault();
 
-            const number =
-                card.dataset.product;
-
             const product =
                 products.find(
                     item =>
-                        item.number === number
+                        item.number === card.dataset.product
                 );
 
             if (product) {
@@ -612,32 +562,27 @@ if (productList) {
 
         }
     );
-
 }
 
 
-/* Modal controls */
+/* =========================================
+   MODAL CONTROLS
+========================================= */
 
 if (modalClose) {
-
     modalClose.addEventListener(
         "click",
         closeProduct
     );
-
 }
 
 if (modalBackdrop) {
-
     modalBackdrop.addEventListener(
         "click",
         closeProduct
     );
-
 }
 
-
-/* Escape key */
 
 document.addEventListener(
     "keydown",
@@ -648,10 +593,8 @@ document.addEventListener(
             productModal &&
             productModal.classList.contains("active")
         ) {
-
             closeProduct();
-
         }
 
     }
-);  
+);

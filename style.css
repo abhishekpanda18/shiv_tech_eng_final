@@ -79,12 +79,11 @@ button {
 }
 
 .brand img {
-    display: block;
-
-    width: 170px;
+    width: 115px;
     height: auto;
-
+    max-height: 42px;
     object-fit: contain;
+    display: block;
 }
 
 
@@ -1636,7 +1635,8 @@ footer {
     }
 
     .brand img {
-        width: 125px;
+        width: 100px;
+        max-height: 38px;
     }
 
     .nav-links {
