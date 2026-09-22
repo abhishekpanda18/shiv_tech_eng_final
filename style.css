@@ -1584,7 +1584,8 @@ footer {
     }
 
     .brand img {
-        width: 140px;
+        width: 100px;
+        max-height: 38px;
     }
 
     .nav-links {
@@ -1635,8 +1636,7 @@ footer {
     }
 
     .brand img {
-        width: 100px;
-        max-height: 38px;
+        width: 125px;
     }
 
     .nav-links {
@@ -1661,6 +1661,31 @@ footer {
 
     .hero-scroll {
         height: 230vh;
+    }
+
+    .hero-sticky {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #000;
+    }
+
+    .hero-video {
+        width: 100vw !important;
+        height: auto !important;
+        max-width: 100vw;
+        max-height: none;
+        aspect-ratio: 16 / 9;
+        object-fit: contain !important;
+        object-position: center center;
+        display: block;
+        flex: 0 0 auto;
+        background: #000;
     }
 
 
