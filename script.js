@@ -1,21 +1,52 @@
 /* =========================================
-   HERO SCROLL VIDEO — OPTIMIZED FOR MOBILE
+   RESPONSIVE HERO SCROLL VIDEO
 ========================================= */
 
-const video = document.getElementById("heroVideo");
-const heroSection = document.querySelector(".hero-scroll");
+const desktopVideo =
+    document.getElementById("heroVideo");
 
-let target = 0;
-let current = 0;
-let animationFrame = null;
-let lastVideoTime = -1;
-let lastVideoUpdate = 0;
+const mobileVideo =
+    document.getElementById("heroMobileVideo");
 
-const mobileQuery = window.matchMedia("(max-width: 700px)");
+const heroSection =
+    document.querySelector(".hero-scroll");
+
+
+/* -----------------------------------------
+   DEVICE DETECTION
+----------------------------------------- */
+
+const mobileQuery =
+    window.matchMedia("(max-width: 700px)");
 
 function isMobile() {
     return mobileQuery.matches;
 }
+
+
+/* -----------------------------------------
+   ACTIVE VIDEO
+----------------------------------------- */
+
+function getActiveVideo() {
+
+    return isMobile()
+        ? mobileVideo
+        : desktopVideo;
+}
+
+
+/* -----------------------------------------
+   SCROLL STATE
+----------------------------------------- */
+
+let target = 0;
+let current = 0;
+
+let animationFrame = null;
+
+let lastVideoTime = -1;
+let lastVideoUpdate = 0;
 
 
 /* -----------------------------------------
@@ -24,14 +55,16 @@ function isMobile() {
 
 function updateTarget() {
 
-    if (!heroSection || !video) {
+    if (!heroSection) {
         return;
     }
 
-    const rect = heroSection.getBoundingClientRect();
+    const rect =
+        heroSection.getBoundingClientRect();
 
     const scrollDistance =
-        heroSection.offsetHeight - window.innerHeight;
+        heroSection.offsetHeight -
+        window.innerHeight;
 
     if (scrollDistance <= 0) {
         return;
@@ -46,27 +79,46 @@ function updateTarget() {
     );
 
     if (!animationFrame) {
+
         animationFrame =
-            requestAnimationFrame(renderVideo);
+            requestAnimationFrame(renderHero);
     }
 }
 
 
 /* -----------------------------------------
-   OPTIMIZED VIDEO SCRUB
+   HERO VIDEO RENDER
 ----------------------------------------- */
 
-function renderVideo(timestamp) {
+function renderHero(timestamp) {
 
     animationFrame = null;
 
-    const mobile = isMobile();
+    const mobile =
+        isMobile();
+
+    const video =
+        getActiveVideo();
+
+    if (!video) {
+        return;
+    }
+
+
+    /* -------------------------------------
+       SMOOTH SCROLL INTERPOLATION
+    ------------------------------------- */
 
     current +=
-        (target - current) * (mobile ? 0.18 : 0.12);
+        (target - current) *
+        (mobile ? 0.20 : 0.12);
+
+
+    /* -------------------------------------
+       VIDEO SCRUB
+    ------------------------------------- */
 
     if (
-        video &&
         video.readyState >= 2 &&
         Number.isFinite(video.duration)
     ) {
@@ -80,38 +132,171 @@ function renderVideo(timestamp) {
         const desiredTime =
             current * duration;
 
+
         const timeDifference =
-            Math.abs(desiredTime - lastVideoTime);
+            Math.abs(
+                desiredTime -
+                lastVideoTime
+            );
 
-        /*
-           Mobile:
-           Limit video seeking to reduce lag.
-        */
-        const minInterval =
-            mobile ? 50 : 0;
 
-        const enoughTimePassed =
-            timestamp - lastVideoUpdate >= minInterval;
+        /* ---------------------------------
+           MOBILE VIDEO
+           Separate mobile animation.
+        --------------------------------- */
 
-        if (
-            timeDifference > (mobile ? 0.025 : 0.005) &&
-            enoughTimePassed
-        ) {
+        if (mobile) {
 
-            video.currentTime = desiredTime;
+            const enoughTimePassed =
+                timestamp -
+                lastVideoUpdate >= 40;
 
-            lastVideoTime = desiredTime;
-            lastVideoUpdate = timestamp;
+
+            if (
+                timeDifference > 0.02 &&
+                enoughTimePassed
+            ) {
+
+                video.currentTime =
+                    desiredTime;
+
+                lastVideoTime =
+                    desiredTime;
+
+                lastVideoUpdate =
+                    timestamp;
+            }
+
+        }
+
+
+        /* ---------------------------------
+           DESKTOP VIDEO
+           Keep desktop animation smooth.
+        --------------------------------- */
+
+        else {
+
+            if (
+                timeDifference > 0.003
+            ) {
+
+                video.currentTime =
+                    desiredTime;
+
+                lastVideoTime =
+                    desiredTime;
+
+                lastVideoUpdate =
+                    timestamp;
+            }
         }
     }
 
+
+    /* -------------------------------------
+       KEEP ANIMATING
+    ------------------------------------- */
+
     if (
-        Math.abs(target - current) > 0.0005
+        Math.abs(
+            target - current
+        ) > 0.0005
     ) {
 
         animationFrame =
-            requestAnimationFrame(renderVideo);
+            requestAnimationFrame(
+                renderHero
+            );
     }
+}
+
+
+/* -----------------------------------------
+   PREPARE VIDEO
+----------------------------------------- */
+
+function prepareVideo(video) {
+
+    if (!video) {
+        return;
+    }
+
+    video.preload = "auto";
+
+    video.muted = true;
+
+    video.playsInline = true;
+
+
+    video.addEventListener(
+        "loadedmetadata",
+        updateTarget
+    );
+
+
+    video.addEventListener(
+        "loadeddata",
+        updateTarget
+    );
+}
+
+
+prepareVideo(desktopVideo);
+
+prepareVideo(mobileVideo);
+
+
+/* -----------------------------------------
+   DEVICE CHANGE
+----------------------------------------- */
+
+function handleDeviceChange() {
+
+    const activeVideo =
+        getActiveVideo();
+
+    if (!activeVideo) {
+        return;
+    }
+
+
+    current = target;
+
+    lastVideoTime = -1;
+
+    lastVideoUpdate = 0;
+
+
+    if (
+        activeVideo.readyState >= 2 &&
+        Number.isFinite(
+            activeVideo.duration
+        )
+    ) {
+
+        activeVideo.currentTime =
+            target *
+            Math.max(
+                0,
+                activeVideo.duration - 0.03
+            );
+    }
+
+
+    updateTarget();
+}
+
+
+if (
+    mobileQuery.addEventListener
+) {
+
+    mobileQuery.addEventListener(
+        "change",
+        handleDeviceChange
+    );
+
 }
 
 
@@ -127,27 +312,16 @@ window.addEventListener(
     }
 );
 
+
 window.addEventListener(
     "resize",
     updateTarget
 );
 
-if (video) {
 
-    video.preload = "auto";
-    video.playsInline = true;
-    video.muted = true;
-
-    video.addEventListener(
-        "loadedmetadata",
-        updateTarget
-    );
-
-    video.addEventListener(
-        "loadeddata",
-        updateTarget
-    );
-}
+/* -----------------------------------------
+   START
+----------------------------------------- */
 
 updateTarget();
 

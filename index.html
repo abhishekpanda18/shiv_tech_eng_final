@@ -51,10 +51,21 @@
 
             <div class="hero-sticky">
 
+                <!-- DESKTOP / LAPTOP -->
                 <video
                     id="heroVideo"
-                    class="hero-video"
+                    class="hero-video hero-video-desktop"
                     src="hero.mp4"
+                    muted
+                    playsinline
+                    preload="auto"
+                ></video>
+
+                <!-- MOBILE -->
+                <video
+                    id="heroMobileVideo"
+                    class="hero-video hero-video-mobile"
+                    src="hero-mobile.mp4"
                     muted
                     playsinline
                     preload="auto"
@@ -118,8 +129,6 @@
                     <div class="about-divider"></div>
 
                     <div class="about-small-note">
-
-                    
 
                         <p>
                             Attention to specification,
